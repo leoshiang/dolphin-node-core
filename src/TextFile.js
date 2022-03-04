@@ -3,6 +3,9 @@ const fs = require('fs')
 const WriteMode = { flag: 'w+' }
 const AppendMode = { flag: 'a' }
 
+/**
+ * @class
+ */
 class TextFile {
   constructor (fileName) {
     this.fileName = fileName

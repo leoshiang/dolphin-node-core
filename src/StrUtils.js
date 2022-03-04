@@ -1,6 +1,8 @@
+/** @module StrUtils **/
+
 /**
  * 判斷詞彙是否同時出現在句子中。
- * @param {[string]} words 詞彙陣列，["new", "york"]
+ * @param {*} words 詞彙陣列，["new", "york"]
  * @param {string} sentence 句子。
  * @return {boolean}
  */

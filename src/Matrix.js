@@ -9,7 +9,7 @@ const Type = require('./Type')
  * 此 callback 會在遍歷每一個 column 時被呼叫一次。
  *
  * @callback forEachColumnCallback
- * @param {[*]} value 值。
+ * @param {*} value 值。
  * @param {*} column  column 編號。
  */
 
@@ -26,10 +26,13 @@ const Type = require('./Type')
  * 此 callback 會在遍歷每一個 row 時被呼叫一次。
  *
  * @callback forEachRowCallback
- * @param {[*]} value 值。
+ * @param {*} value 值。
  * @param {*} row  row 編號。
  */
 
+/**
+ * @class
+ */
 class Matrix {
   #columns = 0
   #rows = 0
@@ -83,11 +86,15 @@ class Matrix {
     let columnsToCopy = Math.min(this.#columns, columnCount)
     let remainingColumns = columnCount - columnsToCopy
     let currentRow = this.#elements[rowIndex]
-    let result = currentRow.slice(0, columnsToCopy - 1)
+    let result = currentRow.slice(0, columnsToCopy)
     for (let i = 0; i < remainingColumns; i++) {
       result.push(undefined)
     }
     return result
+  }
+
+  dump () {
+    this.forEachRow(row => {console.log(row)})
   }
 
   #initFromArray (array) {
@@ -172,7 +179,7 @@ class Matrix {
   /**
    * 取得整個 row 的資料。
    * @param {number} column 編號。
-   * @return {[*]} 資料陣列。
+   * @return {*} 資料陣列。
    * @example
    * let m = new Matrix(3, 3)
    *     m.set(0, 0, 1)
@@ -397,8 +404,9 @@ class Matrix {
   /**
    * 取得整個 row 的資料。
    * @param {number} row 編號。
-   * @return {[*]} 資料陣列。
-   * @throws {InvalidParameterException, IndexOutOfRangeException}
+   * @return {*} 資料陣列。
+   * @throws {InvalidParameterException}
+   * @throws {IndexOutOfRangeException}
    * @example
    * let m = new Matrix(3, 3)
    *     m.set(0, 0, 1)
@@ -415,7 +423,8 @@ class Matrix {
    * 計算 row 所有元素的總和。
    * @param row row 編號。
    * @return {*} 所有元素的總和。
-   * @throws {InvalidParameterException, IndexOutOfRangeException}
+   * @throws {InvalidParameterException}
+   * @throws {IndexOutOfRangeException}
    * @example
    * new Matrix(3, 3).fill(1).rowSum(0) // 3
    */
@@ -444,7 +453,7 @@ class Matrix {
   /**
    * 設定 column 的值。
    * @param {number} column 編號。
-   * @param {[]} values 資料陣列，長度必須與 row 數目一樣。
+   * @param {*} values 資料陣列，長度必須與 row 數目一樣。
    * @return {Matrix}
    * @throws {TypeError}
    * @example
@@ -475,9 +484,10 @@ class Matrix {
   /**
    * 設定 row 的值。
    * @param {number} row row 編號。
-   * @param {[]} values 資料陣列，長度必須與 column 數目一樣。
+   * @param {*} values 資料陣列，長度必須與 column 數目一樣。
    * @return {Matrix}
-   * @throws {InvalidParameterException, IndexOutOfRangeException}
+   * @throws {InvalidParameterException}
+   * @throws {IndexOutOfRangeException}
    * @example
    * let m = new Matrix(3, 3)
    * m.fill(1)

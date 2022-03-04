@@ -1,3 +1,5 @@
+/** @module Type **/
+
 const Types = {
   Array: 'Array',
   Boolean: 'Boolean',

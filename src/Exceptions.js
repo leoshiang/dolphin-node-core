@@ -1,3 +1,8 @@
+/** @module Exceptions **/
+
+/**
+ * @class
+ */
 class KeyNotExistsException extends Error {
   constructor (message) {
     super(message)
@@ -6,6 +11,9 @@ class KeyNotExistsException extends Error {
   }
 }
 
+/**
+ * @class
+ */
 class IndexOutOfRangeException extends Error {
   constructor (message) {
     super(message)
@@ -14,6 +22,9 @@ class IndexOutOfRangeException extends Error {
   }
 }
 
+/**
+ * @class
+ */
 class InvalidParameterException extends Error {
   constructor (message) {
     super(message)
@@ -22,6 +33,9 @@ class InvalidParameterException extends Error {
   }
 }
 
+/**
+ * @class
+ */
 class TypeError extends Error {
   constructor (message) {
     super(message)

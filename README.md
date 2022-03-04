@@ -11,6 +11,9 @@ node-dolphin 是一個 npm 套件，包含了一些常用的 JavaScript 物件�
 
 ## 文件
 
+詳細的 [JSDoc](jsdocs/index.html)。
+
+簡要的說明：
 * [Matrix](docs/matrix.md)
 ## 下載
 ```bash

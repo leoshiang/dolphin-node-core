@@ -41,7 +41,7 @@ const defaultConfig = {
  * 此 callback 會在遍歷每一個 row key 時被呼叫一次。
  *
  * @callback forEachRowCallback
- * @param {[*]} row row 所有值的陣列。
+ * @param {*} row row 所有值的陣列。
  * @param {*} rowKey row 鍵值。
  */
 
@@ -81,7 +81,8 @@ class DynamicMatrix {
 
   /**
    * 驗證 columnKey 是否有效以及是否存在。
-   * @throws {InvalidParameterException, KeyNotExistsException}
+   * @throws {InvalidParameterException}
+   * @throws {KeyNotExistsException}
    * @param {*} columnKey column 鍵值。
    */
   #checkColumnKey (columnKey) {
@@ -95,7 +96,8 @@ class DynamicMatrix {
 
   /**
    * 確認 rowKey 是否有效以及是否存在。
-   * @throws {InvalidParameterException, KeyNotExistsException}
+   * @throws {InvalidParameterException}
+   * @throws {KeyNotExistsException}
    * @param {*} rowKey row 鍵值。
    */
   #checkRowKey (rowKey) {
@@ -140,7 +142,7 @@ class DynamicMatrix {
   /**
    * 取得 column 全部值的陣列。
    * @param columnKey column 鍵值。
-   * @returns {[*]} 一個全部值的陣列。
+   * @returns {*} 一個全部值的陣列。
    * @example
    * let m = new DynamicMatrix()
    * m.set(1, 1, 3)
@@ -171,7 +173,8 @@ class DynamicMatrix {
    * 回傳某一個 column 值的加總。
    * @param columnKey column 鍵值。
    * @returns {number} column 值的加總。
-   * @throws {InvalidParameterException, KeyNotExistsException}
+   * @throws {InvalidParameterException}
+   * @throws {KeyNotExistsException}
    * @example
    * let m = new DynamicMatrix()
    * m.set(1, 1, 3)
@@ -354,7 +357,7 @@ class DynamicMatrix {
   /**
    * 取得 row 全部值的陣列。
    * @param {*} rowKey row 鍵值。
-   * @return {*[]} 一個全部值的陣列。
+   * @return {*} 一個全部值的陣列。
    * @example
    * let m = new DynamicMatrix()
    *     m.set(1, 1, 1)
@@ -444,7 +447,7 @@ class DynamicMatrix {
   /**
    * 用陣列的值填入 column。
    * @param {*} columnKey column 鍵值。
-   * @param {[*]} values 資料陣列。
+   * @param {*} values 資料陣列。
    * @return {DynamicMatrix}
    * @throws {InvalidParameterException}
    * @example
@@ -483,7 +486,7 @@ class DynamicMatrix {
   /**
    * 用陣列的值填入 row。
    * @param {*} rowKey row 鍵值。
-   * @param {[*]} values 資料陣列。
+   * @param {*} values 資料陣列。
    * @return {DynamicMatrix}
    * @throws {InvalidParameterException}
    * @example
@@ -545,7 +548,7 @@ class DynamicMatrix {
 
   /**
    * 將矩陣轉為 2 維陣列。
-   * @return {*[]}
+   * @return {*}
    * @example
    * let m = new DynamicMatrix()
    * m.setRow(1, [1, 2, 3])

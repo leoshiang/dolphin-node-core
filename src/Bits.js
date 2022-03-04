@@ -7,6 +7,9 @@ const { IndexOutOfRangeException } = require('./Exceptions')
  * @param {number} index 位元編號。
  */
 
+/**
+ * @class
+ */
 class Bits {
   #bitsPerPage = 32
   #length = 0
