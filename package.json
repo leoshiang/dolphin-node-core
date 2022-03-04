@@ -9,7 +9,7 @@
   "scripts": {
     "test": "jest",
     "build": "webpack",
-    "generate-docs": "jsdoc --configure .jsdoc.json --verbose"
+    "docs": "jsdoc --configure .jsdoc.json --verbose"
   },
   "repository": {
     "type": "git",
