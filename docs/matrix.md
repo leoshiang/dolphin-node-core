@@ -8,8 +8,8 @@ Matrix 是一個二維矩陣，索引從0開始。其元素可以是任何型別
 
 ```javascript
 const { Matrix } = require('node-dophin')
-const m1 = new Matrix()					// 空矩陣
-const m2 = new Matrix(4, 3)			// 4x3 矩陣(4 rows, 3 columns)
+const m1 = new Matrix()         // 空矩陣
+const m2 = new Matrix(4, 3)     // 4x3 矩陣(4 rows, 3 columns)
 const m3 = new Matrix(3, 3, 1)  // 3x3 矩陣，用預設值 1 填滿
 const m4 = new Matrix([1,2,3],  // | 1 2 3 | 
                       [4,5,6],  // | 4 5 6 |
@@ -39,8 +39,8 @@ const m = new Matrix(['a', 1, new Date()],
 const { Matrix } = require('node-dophin')
 const m = new Matrix(3, 3)
 m.identity()  // | 1 0 0 |
-							// | 0 1 0 |
-							// | 0 0 1 |
+              // | 0 1 0 |
+              // | 0 0 1 |
 ```
 
 ## 複製
@@ -53,8 +53,8 @@ const m1 = new Matrix([1,2,3],  // | 1 2 3 |
                       [4,5,6],  // | 4 5 6 |
                       [7,8,9])  // | 7 8 9 |
 const m2 = m1.clone() // | 1 2 3 | 
-											// | 4 5 6 |
-											// | 7 8 9 |
+                      // | 4 5 6 |
+                      // | 7 8 9 |
 ```
 
 ## 改變維度
@@ -66,13 +66,13 @@ const { Matrix } = require('node-dophin')
 const m1 = new Matrix([1,2,3],  // | 1 2 3 | 
                       [4,5,6],  // | 4 5 6 |
                       [7,8,9])  // | 7 8 9 |
-m1.resize(3, 1)	// | 1 |
-								// | 4 |
-								// | 7 |
+m1.resize(3, 1) // | 1 |
+                // | 4 |
+                // | 7 |
 const m2 = new Matrix([1, 2, 3])
 m2.resize(3, 3) // | 1 2 3 |
-								// | 0 0 0 |
-								// | 0 0 0 |
+                // | 0 0 0 |
+                // | 0 0 0 |
 ```
 
 ## 資料處理
@@ -128,11 +128,11 @@ console.log(m.rows) // 3
 ```javascript
 const { Matrix } = require('node-dophin')
 let m = new Matrix(3, 3).fill(1) // | 1 1 1 |
-																 // | 1 1 1 |
-																 // | 1 1 1 |
+                                 // | 1 1 1 |
+                                 // | 1 1 1 |
 let n = new Matrix(3, 3).fill('a') // | a a a |
-																   // | a a a |
-															     // | a a a |
+                                   // | a a a |
+                                   // | a a a |
 ```
 
 ### 取得元素
@@ -161,8 +161,8 @@ const m = new Matrix([1,2,3],  // | 1 2 3 |
                      [4,5,6],  // | 4 5 6 |
                      [7,8,9])  // | 7 8 9 |
 m.set(1,1,9) // | 1 2 3 | 
-						 // | 4 9 6 |
-						 // | 7 8 9 |
+             // | 4 9 6 |
+             // | 7 8 9 |
 ```
 
 ## 迭代
@@ -249,8 +249,8 @@ let m = new Matrix([1, 2],
 let n = new Matrix([1, 2, 3, 4],
                    [5, 6, 7, 8])
 let result = m.multiply(n) // | 11 14 17 20 |
-													 // | 23 30 37 44 |
-													 // | 35 46 57 68 |
+                           // | 23 30 37 44 |
+                           // | 35 46 57 68 |
 ```
 
 也可以將陣列每一個元素乘上一個值：
@@ -261,8 +261,8 @@ let m = new Matrix([1, 2, 3],
                    [2, 3, 4],
                    [3, 4, 5])
 m.multiply(3) // | 3  6  9 |
-				 			// | 6  9 12 |
-         			// | 9 12 15 |
+              // | 6  9 12 |
+              // | 9 12 15 |
 ```
 
 ### 矩陣相加
@@ -276,7 +276,7 @@ let m = new Matrix([1, 2, 3],
                    [3, 4, 5])
 let n = new Matrix(3, 3, 1)
 let result = n.add(m) // |  0 -1 -2 |
-											//	| -1 -2 -3 |
+                      //  | -1 -2 -3 |
                       // | -2 -3 -4 |
 ```
 
@@ -288,7 +288,7 @@ let m = new Matrix([1, 2, 3],
                    [2, 3, 4],
                    [3, 4, 5])
 m.add(1) // | 0 1 2 |
-				 // | 1 2 3 |
+         // | 1 2 3 |
          // | 2 3 4 |
 ```
 
@@ -303,7 +303,7 @@ let m = new Matrix([1, 2, 3],
                    [3, 4, 5])
 let n = new Matrix(3, 3, 1)
 let result = n.subtract(m) // |  0 -1 -2 |
-													 //	| -1 -2 -3 |
+                           // | -1 -2 -3 |
                            // | -2 -3 -4 |
 ```
 
@@ -315,7 +315,7 @@ let m = new Matrix([1, 2, 3],
                    [2, 3, 4],
                    [3, 4, 5])
 m.subtract(1) // | 0 1 2 |
-							// | 1 2 3 |
+              // | 1 2 3 |
               // | 2 3 4 |
 ```
 
