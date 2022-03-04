@@ -118,7 +118,7 @@ class Bits {
   toInt32 () {
     return this.#pages.length === 0
       ? 0
-      : this.#pages[0] || 0
+      : this.#pages[0]
   }
 }
 

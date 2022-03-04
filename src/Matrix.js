@@ -93,6 +93,9 @@ class Matrix {
     return result
   }
 
+  /**
+   * 將整個陣列用 console 列出。
+   */
   dump () {
     this.forEachRow(row => {console.log(row)})
   }

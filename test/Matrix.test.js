@@ -641,3 +641,21 @@ describe('測試 sum', () => {
     expect(m.sum()).toBe('abcdefghi')
   })
 })
+
+describe('測試 dup', () => {
+  test('3x3 矩陣用 1 填滿，加總應等於9', () => {
+    expect(new Matrix(3, 3).fill(1).sum()).toBe(9)
+  })
+
+  test('3x3 矩陣用 a-i 填滿，加總應等於 "abcdefghi"', () => {
+    let outputData = "";
+    log = inputs => (outputData += inputs);
+    console["log"] = jest.fn(log);
+    let m = new Matrix(3, 3, '')
+    m.setRow(0, ['a', 'b', 'c'])
+    m.setRow(1, ['d', 'e', 'f'])
+    m.setRow(2, ['g', 'h', 'i'])
+    m.dump()
+    expect(outputData).toBe('a,b,cd,e,fg,h,i');
+  })
+})
