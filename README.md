@@ -11,7 +11,7 @@ node-dolphin 是一個 npm 套件，包含了一些常用的 JavaScript 物件�
 
 ## 文件
 
-詳細的 [JSDoc](docs/index.html)。
+[詳細的 JSDoc 說明](https://leoshiang.github.io/node-dolphin/)。
 
 簡要的說明：
 * [Matrix](md/matrix.md)
