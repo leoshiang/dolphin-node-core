@@ -14,10 +14,16 @@ module.exports = {
         use: {
           loader: 'babel-loader?plugins=rewire',
           options: {
-            presets: ['@babel/preset-env']
-          }
-        }
-      }
-    ]
-  }
+            presets: ['@babel/preset-env'],
+          },
+        },
+      },
+    ],
+  },
+  resolve: {
+    fallback: {
+      'fs': false,
+      'os': false,
+    },
+  },
 }
