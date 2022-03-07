@@ -34,6 +34,7 @@ class TextFile {
     this.#mode = AppendMode
     this.#fileName = fileName
     fs.writeFileSync(this.#fileName, '', this.#mode)
+    return this
   }
 
   /**
@@ -52,6 +53,7 @@ class TextFile {
     this.#mode = WriteMode
     this.#fileName = fileName
     fs.writeFileSync(this.#fileName, '', this.#mode)
+    return this
   }
 
   /**
@@ -60,6 +62,7 @@ class TextFile {
    */
   write (line) {
     fs.writeFileSync(this.#fileName, String(line || ''), AppendMode)
+    return this
   }
 
   /**
@@ -69,6 +72,7 @@ class TextFile {
    */
   writeLine (line, eol) {
     this.write(String(line || '') + (eol || EOL))
+    return this
   }
 }
 

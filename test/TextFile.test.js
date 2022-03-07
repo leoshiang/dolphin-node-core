@@ -77,6 +77,22 @@ describe('測試 append', function () {
     } catch (e) {
     }
   })
+
+  test('應回傳自己。', function () {
+    const tempDir = os.tmpdir()
+    let tempFileName = tempDir + '/textfile-test.txt'
+    if (fs.existsSync(tempFileName)) {
+      fs.unlinkSync(tempFileName)
+    }
+    fs.writeFileSync(tempFileName, 'THIS IS LINE 1\n')
+
+    let textFile = new TextFile()
+    expect(textFile.append(tempFileName)).toBe(textFile)
+    try {
+      fs.unlinkSync(tempFileName)
+    } catch (e) {
+    }
+  })
 })
 
 describe('測試 rewrite', function () {
@@ -151,6 +167,21 @@ describe('測試 rewrite', function () {
     } catch (e) {
     }
   })
+
+  test('應回傳自己。', function () {
+    const tempDir = os.tmpdir()
+    let tempFileName = tempDir + '/textfile-test.txt'
+    if (fs.existsSync(tempFileName)) {
+      fs.unlinkSync(tempFileName)
+    }
+    fs.writeFileSync(tempFileName, 'THIS IS LINE 1\n')
+    let textFile = new TextFile()
+    expect(textFile.rewrite(tempFileName)).toBe(textFile)
+    try {
+      fs.unlinkSync(tempFileName)
+    } catch (e) {
+    }
+  })
 })
 
 describe('測試 write', function () {
@@ -191,6 +222,22 @@ describe('測試 write', function () {
     } catch (e) {
     }
   })
+
+  test('應回傳自己。', function () {
+    const tempDir = os.tmpdir()
+    let tempFileName = tempDir + '/textfile-test.txt'
+    if (fs.existsSync(tempFileName)) {
+      fs.unlinkSync(tempFileName)
+    }
+
+    let textFile = new TextFile()
+    textFile.rewrite(tempFileName)
+    expect(textFile.write(1234)).toBe(textFile)
+    try {
+      fs.unlinkSync(tempFileName)
+    } catch (e) {
+    }
+  })
 })
 
 describe('測試 writeLine', function () {
@@ -226,6 +273,22 @@ describe('測試 writeLine', function () {
     textFile.writeLine(1234)
     let lines = textFile.readAll()
     expect(lines).toBe('\n1234\n')
+    try {
+      fs.unlinkSync(tempFileName)
+    } catch (e) {
+    }
+  })
+
+  test('應回傳自己。', function () {
+    const tempDir = os.tmpdir()
+    let tempFileName = tempDir + '/textfile-test.txt'
+    if (fs.existsSync(tempFileName)) {
+      fs.unlinkSync(tempFileName)
+    }
+
+    let textFile = new TextFile()
+    textFile.rewrite(tempFileName)
+    expect(textFile.writeLine()).toBe(textFile)
     try {
       fs.unlinkSync(tempFileName)
     } catch (e) {
