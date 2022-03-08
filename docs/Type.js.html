@@ -68,7 +68,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-Exceptions.html">Exceptions</a></li><li><a href="module-StrUtils.html">StrUtils</a></li><li><a href="module-Type.html">Type</a></li></ul><h3>Classes</h3><ul><li><a href="Bits.html">Bits</a></li><li><a href="DynamicMatrix.html">DynamicMatrix</a></li><li><a href="Matrix.html">Matrix</a></li><li><a href="module-Exceptions-IndexOutOfRangeException.html">IndexOutOfRangeException</a></li><li><a href="module-Exceptions-InvalidParameterException.html">InvalidParameterException</a></li><li><a href="module-Exceptions-KeyNotExistsException.html">KeyNotExistsException</a></li><li><a href="module-Exceptions-TypeError.html">TypeError</a></li><li><a href="TextFile.html">TextFile</a></li></ul><h3>Global</h3><ul><li><a href="global.html#defaultConfig">defaultConfig</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-Exceptions.html">Exceptions</a></li><li><a href="module-StrUtils.html">StrUtils</a></li><li><a href="module-Type.html">Type</a></li></ul><h3>Classes</h3><ul><li><a href="Bits.html">Bits</a></li><li><a href="DynamicMatrix.html">DynamicMatrix</a></li><li><a href="Matrix.html">Matrix</a></li><li><a href="module-Exceptions-IndexOutOfRangeException.html">IndexOutOfRangeException</a></li><li><a href="module-Exceptions-InvalidParameterException.html">InvalidParameterException</a></li><li><a href="module-Exceptions-KeyNotExistsException.html">KeyNotExistsException</a></li><li><a href="module-Exceptions-TypeError.html">TypeError</a></li><li><a href="TextFile.html">TextFile</a></li><li><a href="Vector.html">Vector</a></li></ul><h3>Global</h3><ul><li><a href="global.html#defaultConfig">defaultConfig</a></li></ul></div>
                 
             </nav>
         </div>
@@ -123,8 +123,6 @@ const isNotRegExp = (obj) => getType(obj) !== Types.RegExp
 const isNotString = (obj) => getType(obj) !== Types.String
 const isNotUndefined = (obj) => getType(obj) !== Types.Undefined
 const isZero = (obj) => obj === 0
-const isGreatThanZero = (obj) => isNumber(obj) &amp;&amp; obj > 0
-const isSmallThanZero = (obj) => isNumber(obj) &amp;&amp; obj &lt; 0
 const sameType = (obj, other) => getType(obj) === getType(other)
 
 module.exports = {
@@ -151,8 +149,6 @@ module.exports = {
   isNotString,
   isNotUndefined,
   isZero,
-  isGreatThanZero,
-  isSmallThanZero,
   sameType,
 }
 </code></pre>

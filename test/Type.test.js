@@ -222,36 +222,6 @@ describe('測試 isZero',
                 () => expect(type.isZero(0)).toBe(true))
          })
 
-describe('測試 isSmallThanZero',
-         () => {
-           test('傳入非數值應該回傳 false',
-                () => expect(type.isSmallThanZero({})).toBe(false))
-
-           test('傳入非數值應該回傳 false',
-                () => expect(type.isSmallThanZero('0')).toBe(false))
-
-           test('傳入 2 應該回傳 false',
-                () => expect(type.isSmallThanZero(2)).toBe(false))
-
-           test('傳入 0 應該回傳 false',
-                () => expect(type.isSmallThanZero(0)).toBe(false))
-         })
-
-describe('測試 isGreatThanZero',
-         () => {
-           test('傳入非數值應該回傳 false',
-                () => expect(type.isGreatThanZero({})).toBe(false))
-
-           test('傳入非數值應該回傳 false',
-                () => expect(type.isGreatThanZero('0')).toBe(false))
-
-           test('傳入 2 應該回傳 false',
-                () => expect(type.isGreatThanZero(-1)).toBe(false))
-
-           test('傳入 0 應該回傳 false',
-                () => expect(type.isGreatThanZero(0)).toBe(false))
-         })
-
 describe('測試 sameType',
          () => {
            test('傳入兩個物件應該回傳 true',

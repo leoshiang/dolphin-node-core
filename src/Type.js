@@ -36,8 +36,6 @@ const isNotRegExp = (obj) => getType(obj) !== Types.RegExp
 const isNotString = (obj) => getType(obj) !== Types.String
 const isNotUndefined = (obj) => getType(obj) !== Types.Undefined
 const isZero = (obj) => obj === 0
-const isGreatThanZero = (obj) => isNumber(obj) && obj > 0
-const isSmallThanZero = (obj) => isNumber(obj) && obj < 0
 const sameType = (obj, other) => getType(obj) === getType(other)
 
 module.exports = {
@@ -64,7 +62,5 @@ module.exports = {
   isNotString,
   isNotUndefined,
   isZero,
-  isGreatThanZero,
-  isSmallThanZero,
   sameType,
 }

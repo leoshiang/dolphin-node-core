@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> InvalidParameterException</title>
+  <title> Vector.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -73,155 +75,103 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Class</p>
-                    <h1>InvalidParameterException</h1>
+                    <p>Source</p>
+                    <h1>Vector.js</h1>
                 </header>
                 
 
 
 
-
-<section>
-
-<header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>
-            <span class="ancestors"><a href="module-Exceptions.html">Exceptions</a>~</span>InvalidParameterException<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class='vertical-section'>
-                <div class="members">
-                    <div class="member">
-                        <div class=name>
-                            <span class="tag">Constructor</span>
-                        </div>
-                        
-
-
-    
-    <h4 class="name" id="InvalidParameterException">
-        <a class="href-link" href="#InvalidParameterException">#</a>
-        
-        <span class="code-name">
-            
-                new InvalidParameterException<span class="signature">()</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="Exceptions.js.html" class="button">View Source</a>
-            <span>
-                <a href="Exceptions.js.html">Exceptions.js</a>, <a href="Exceptions.js.html#line28">line 28</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    </div>
-                </div>
-            </div>
-        
-    
-    </div>
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const Type = require('./Type')
+
+/**
+ * @class
+ * @classdesc 向量。
+ */
+class Vector extends Array {
+
+  constructor (...items) {
+    let allItems = items.reduce((a, b) => {
+      if (Type.isArray(b)) {
+        return [...a, ...b]
+      } else {
+        return [...a, b]
+      }
+    }, [])
+    super(...allItems)
+  }
+
+  /**
+   * 向量相加，回傳新向量。
+   * @param {Vector} other
+   * @return {Vector}
+   */
+  add (other) {
+    return new Vector(this.map((x, index) => x + other[index]))
+  }
+
+  /**
+   * cross product
+   * @param {Vector} other
+   * @return {Vector}
+   */
+  cross (other) {
+    return new Vector(this[1] * other[2] - this[2] * other[1],
+                      this[2] * other[0] - this[0] * other[2],
+                      this[0] * other[1] - this[1] * other[0])
+  }
+
+  /**
+   * dot product
+   * @param {Vector} other
+   * @return {number}
+   */
+  dot (other) {
+    return other.reduce((acc, curr, index) => acc + curr * this[index], 0)
+  }
+
+  /**
+   * 距離。
+   * @return {number}
+   */
+  norm () {
+    return Math.sqrt(this.reduce((acc, curr) => acc + curr * curr, 0))
+  }
+
+  /**
+   * 與純量相乘。
+   * @param {number} number
+   * @return {Vector}
+   */
+  scaleBy (number) {
+    return new Vector(this.map(x => x * number))
+  }
+
+  /**
+   * 向量相減，傳回新向量。
+   * @param {Vector} other
+   * @return {Vector}
+   */
+  subtract (other) {
+    return new Vector(this.map((x, index) => x - other[index]))
+  }
+
+  /**
+   * 所有元素的加總。
+   * @return {number}
+   */
+  sum () {
+    return this.reduce((acc, curr) => acc + curr, 0)
+  }
+}
+
+module.exports = { Vector }
+</code></pre>
+        </article>
+    </section>
 
 
 
