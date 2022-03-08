@@ -1,4 +1,4 @@
-const { Vector } = require('../src/Vector')
+const Vector = require('../src/Vector')
 
 describe('測試 constructor', function () {
   test('傳入數字，length 應等於數字', function () {
