@@ -1,6 +1,11 @@
 # Matrix
 
-Matrix 是一個二維矩陣，索引從0開始。其元素可以是任何型別：數字、文字、日期、物件...。
+Matrix 是一個二維矩陣，其索引從0開始。Matrix 具備陣列的特性，因此可以用陣列的方式去存取，例如：
+
+```javascript
+let m = new Matrix(3,3)
+m[2][2] = 1
+```
 
 ## 建立矩陣
 
@@ -9,11 +14,18 @@ Matrix 是一個二維矩陣，索引從0開始。其元素可以是任何型別
 ```javascript
 const { Matrix } = require('node-dophin')
 const m1 = new Matrix()         // 空矩陣
+console.log('m1\r\n', m1)
+
 const m2 = new Matrix(4, 3)     // 4x3 矩陣(4 rows, 3 columns)
+console.log(m2)
+
 const m3 = new Matrix(3, 3, 1)  // 3x3 矩陣，用預設值 1 填滿
-const m4 = new Matrix([1,2,3],  // | 1 2 3 | 
+console.log(m3)
+
+const m4 = new Matrix([1,2,3],  // | 1 2 3 |
                       [4,5,6],  // | 4 5 6 |
                       [7,8,9])  // | 7 8 9 |
+console.log(m4)
 ```
 
 如果傳入的陣列維度不一樣，會自動調整大小為最大的陣列維度，例如：
@@ -98,7 +110,7 @@ const { Matrix } = require('node-dophin')
 let m = new Matrix([1, 2, 3],
                    [4, 5, 6],
                    [7, 8, 9])
-let c = m.row(2) // [7, 8, 9]
+let c = m[2]  // [7, 8, 9]
 ```
 
 ### 取得行（column）的數量
@@ -160,9 +172,9 @@ const { Matrix } = require('node-dophin')
 const m = new Matrix([1,2,3],  // | 1 2 3 | 
                      [4,5,6],  // | 4 5 6 |
                      [7,8,9])  // | 7 8 9 |
-m.set(1,1,9) // | 1 2 3 | 
-             // | 4 9 6 |
-             // | 7 8 9 |
+m[1][1] = 9 // | 1 2 3 | 
+            // | 4 9 6 |
+            // | 7 8 9 |
 ```
 
 ## 迭代
