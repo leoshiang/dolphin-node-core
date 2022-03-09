@@ -6,7 +6,7 @@
  * @param {string} sentence 句子。
  * @return {boolean}
  */
-const contains = (sentence, words) => {
+const coOccurrences = (sentence, words) => {
   let count = 0
   words.forEach(x => {
     let regex = new RegExp(`(^|\\W)${x}($|\\W)`)
@@ -18,5 +18,5 @@ const contains = (sentence, words) => {
 }
 
 module.exports = {
-  contains,
+  coOccurrences,
 }

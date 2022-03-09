@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Adding favicon -->
+    
+
+    <!-- Adding meta -->
+    
+
+    <!-- Adding external script-->
+    
+
+    <!-- Adding external style-->
+    
+
+    <!-- Adding scripts-->
+    
+
+    <!-- Adding style-->
+    
+
+    <!-- Adding overlay script-->
+    
+
+    <!-- Adding overlay style-->
+    
+
+
+    <title>
+      DynamicMatrix.js
+    </title>
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/third-party/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/third-party/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/reset.css">
+    <link type="text/css" rel="stylesheet" href="styles/clean-jsdoc-theme-base.css">
+    <link type="text/css" rel="stylesheet" href="styles/clean-jsdoc-theme-light.css">
+    
+    <svg aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    style="display:none">
+    <defs>
+        <symbol id="copy-icon" viewbox="0 0 488.3 488.3">
+            <g>
+                <path
+                    d="M314.25,85.4h-227c-21.3,0-38.6,17.3-38.6,38.6v325.7c0,21.3,17.3,38.6,38.6,38.6h227c21.3,0,38.6-17.3,38.6-38.6V124    C352.75,102.7,335.45,85.4,314.25,85.4z M325.75,449.6c0,6.4-5.2,11.6-11.6,11.6h-227c-6.4,0-11.6-5.2-11.6-11.6V124    c0-6.4,5.2-11.6,11.6-11.6h227c6.4,0,11.6,5.2,11.6,11.6V449.6z" />
+                <path
+                    d="M401.05,0h-227c-21.3,0-38.6,17.3-38.6,38.6c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5c0-6.4,5.2-11.6,11.6-11.6h227    c6.4,0,11.6,5.2,11.6,11.6v325.7c0,6.4-5.2,11.6-11.6,11.6c-7.5,0-13.5,6-13.5,13.5s6,13.5,13.5,13.5c21.3,0,38.6-17.3,38.6-38.6    V38.6C439.65,17.3,422.35,0,401.05,0z" />
+            </g>
+        </symbol>
+        <symbol id='search-icon' viewBox="0 0 512 512">
+            <g>
+                <g>
+                    <path
+                        d="M225.474,0C101.151,0,0,101.151,0,225.474c0,124.33,101.151,225.474,225.474,225.474    c124.33,0,225.474-101.144,225.474-225.474C450.948,101.151,349.804,0,225.474,0z M225.474,409.323    c-101.373,0-183.848-82.475-183.848-183.848S124.101,41.626,225.474,41.626s183.848,82.475,183.848,183.848    S326.847,409.323,225.474,409.323z" />
+                </g>
+            </g>
+            <g>
+                <g>
+                    <path
+                        d="M505.902,476.472L386.574,357.144c-8.131-8.131-21.299-8.131-29.43,0c-8.131,8.124-8.131,21.306,0,29.43l119.328,119.328    c4.065,4.065,9.387,6.098,14.715,6.098c5.321,0,10.649-2.033,14.715-6.098C514.033,497.778,514.033,484.596,505.902,476.472z" />
+                </g>
+            </g>
+        </symbol>
+        <symbol id="down-icon" viewBox="0 0 16 16">
+            <path 
+                fill-rule="evenodd" 
+                clip-rule="evenodd" 
+                d="M12.7803 6.21967C13.0732 6.51256 13.0732 6.98744 12.7803 7.28033L8.53033 11.5303C8.23744 11.8232 7.76256 11.8232 7.46967 11.5303L3.21967 7.28033C2.92678 6.98744 2.92678 6.51256 3.21967 6.21967C3.51256 5.92678 3.98744 5.92678 4.28033 6.21967L8 9.93934L11.7197 6.21967C12.0126 5.92678 12.4874 5.92678 12.7803 6.21967Z"
+            >
+            </path>
+        </symbol>
+    </defs>
+</svg>
+  </head>
+
+  <body>
+
+    <nav class="navbar" id="navbar">
+      <div class="navbar-heading" id="navbar-heading"><a href="index.html"><h2 class="navbar-heading-text">Home</h2></a></div><div class="search-box" id="search-box"><div class="search-box-input-container"><input class="search-box-input" type="text" placeholder="Search..." id="search-box-input" /><svg class="search-icon" alt="search-icon"><use xlink:href="#search-icon"></use></svg></div><div class="search-item-container" id="search-item-container"><ul class="search-item-ul" id="search-item-ul"></ul></div></div><div class="sidebar-main-content" id="sidebar-main-content"><div class="accordion collapsed" id="7446984" > <h3 class="accordion-heading">Modules<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="module-Exceptions.html">Exceptions</a></li><li class="accordion collapsed child" id=7286176><div class="accordion-heading child"><a href="module-StrUtils.html">StrUtils</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="module-StrUtils.html#~coOccurrences">coOccurrences</a></li></ul></li><li class="accordion-list" id=""><a href="module-Type.html">Type</a></li></ul> </div><div class="accordion collapsed" id="7374750" > <h3 class="accordion-heading">Classes<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion collapsed child" id=278296><div class="accordion-heading child"><a href="Bits.html">Bits</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Bits.html#forEach">forEach</a></li></ul></li><li class="accordion collapsed child" id=9721567><div class="accordion-heading child"><a href="DynamicMatrix.html">DynamicMatrix</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="DynamicMatrix.html#clear">clear</a></li><li data-type='method'><a href="DynamicMatrix.html#column">column</a></li><li data-type='method'><a href="DynamicMatrix.html#columnCount">columnCount</a></li><li data-type='method'><a href="DynamicMatrix.html#columnSum">columnSum</a></li><li data-type='method'><a href="DynamicMatrix.html#fill">fill</a></li><li data-type='method'><a href="DynamicMatrix.html#forEach">forEach</a></li><li data-type='method'><a href="DynamicMatrix.html#forEachColumnKey">forEachColumnKey</a></li><li data-type='method'><a href="DynamicMatrix.html#forEachColumnValues">forEachColumnValues</a></li><li data-type='method'><a href="DynamicMatrix.html#forEachRow">forEachRow</a></li><li data-type='method'><a href="DynamicMatrix.html#forEachRowKey">forEachRowKey</a></li><li data-type='method'><a href="DynamicMatrix.html#get">get</a></li><li data-type='method'><a href="DynamicMatrix.html#row">row</a></li><li data-type='method'><a href="DynamicMatrix.html#rowCount">rowCount</a></li><li data-type='method'><a href="DynamicMatrix.html#rowSum">rowSum</a></li><li data-type='method'><a href="DynamicMatrix.html#set">set</a></li><li data-type='method'><a href="DynamicMatrix.html#setColumn">setColumn</a></li><li data-type='method'><a href="DynamicMatrix.html#setRow">setRow</a></li><li data-type='method'><a href="DynamicMatrix.html#sum">sum</a></li><li data-type='method'><a href="DynamicMatrix.html#toArray">toArray</a></li></ul></li><li class="accordion collapsed child" id=9480347><div class="accordion-heading child"><a href="Matrix.html">Matrix</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Matrix.html#clear">clear</a></li><li data-type='method'><a href="Matrix.html#column">column</a></li><li data-type='method'><a href="Matrix.html#fill">fill</a></li><li data-type='method'><a href="Matrix.html#forEachColumn">forEachColumn</a></li><li data-type='method'><a href="Matrix.html#forEachRow">forEachRow</a></li><li data-type='method'><a href="Matrix.html#identity">identity</a></li><li data-type='method'><a href="Matrix.html#isSquare">isSquare</a></li><li data-type='method'><a href="Matrix.html#multiply">multiply</a></li><li data-type='method'><a href="Matrix.html#resize">resize</a></li><li data-type='method'><a href="Matrix.html#row">row</a></li><li data-type='method'><a href="Matrix.html#subtract">subtract</a></li></ul></li><li class="accordion-list" id=""><a href="module-Exceptions-IndexOutOfRangeException.html">IndexOutOfRangeException</a></li><li class="accordion-list" id=""><a href="module-Exceptions-InvalidParameterException.html">InvalidParameterException</a></li><li class="accordion-list" id=""><a href="module-Exceptions-KeyNotExistsException.html">KeyNotExistsException</a></li><li class="accordion collapsed child" id=1318552><div class="accordion-heading child"><a href="TextFile.html">TextFile</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="TextFile.html#append">append</a></li><li data-type='method'><a href="TextFile.html#readAll">readAll</a></li><li data-type='method'><a href="TextFile.html#rewrite">rewrite</a></li><li data-type='method'><a href="TextFile.html#write">write</a></li><li data-type='method'><a href="TextFile.html#writeLine">writeLine</a></li></ul></li><li class="accordion collapsed child" id=6541092><div class="accordion-heading child"><a href="Vector.html">Vector</a><svg><use xlink:href="#down-icon"></use></svg></div><ul class='methods accordion-content'><li data-type='method'><a href="Vector.html#add">add</a></li><li data-type='method'><a href="Vector.html#cross">cross</a></li><li data-type='method'><a href="Vector.html#dot">dot</a></li><li data-type='method'><a href="Vector.html#norm">norm</a></li><li data-type='method'><a href="Vector.html#scaleBy">scaleBy</a></li><li data-type='method'><a href="Vector.html#subtract">subtract</a></li><li data-type='method'><a href="Vector.html#sum">sum</a></li></ul></li></ul> </div><div class="accordion collapsed" id="6783145" > <h3 class="accordion-heading">Global<svg><use xlink:href="#down-icon"></use></svg></h3><ul class="accordion-content"><li class="accordion-list" id=""><a href="global.html#configObject">configObject</a></li><li class="accordion-list" id=""><a href="global.html#defaultConfig">defaultConfig</a></li><li class="accordion-list" id=""><a href="global.html#forEachCallback">forEachCallback</a></li><li class="accordion-list" id=""><a href="global.html#forEachColumnCallback">forEachColumnCallback</a></li><li class="accordion-list" id=""><a href="global.html#forEachColumnKeyCallback">forEachColumnKeyCallback</a></li><li class="accordion-list" id=""><a href="global.html#forEachRowCallback">forEachRowCallback</a></li><li class="accordion-list" id=""><a href="global.html#forEachRowKeyCallback">forEachRowKeyCallback</a></li></ul> </div>
+      
+
+    </nav>
+    <div class="navbar-ham" id="navbar-ham">
+      <div>
+        <div class="first"></div>
+        <div class="second"></div>
+        <div class="third"></div>
+      </div>
+    </div>
+
+    <div id="main" class="main-content">
+      
+      <h1 id='page-title' class="page-title">
+        DynamicMatrix.js
+      </h1>
+      
+
+      
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const {
+  InvalidParameterException,
+  KeyNotExistsException,
+} = require('./Exceptions')
+const Type = require('./Type')
+
+/**
+ @typedef {object} configObject
+ @property {*} defaultValue 讀取 cell 時，如果是 undefined 會用此值取代。
+ @property {boolean} strictMode 嚴格模式，預設 false。
+ 如果是 true，當讀取不存在的 cell 時會拋出例外。
+ 如果是 false，當讀取不存在的 cell 時會回傳 undefined。
+ */
+
+/**
+ * 預設設定
+ * @type {{defaultValue: number, strictMode: boolean}}
+ */
+const defaultConfig = {
+  defaultValue: 0,
+  strictMode: false,
+}
+
+/**
+ * 此 callback 會在遍歷每一個值時被呼叫一次。
+ *
+ * @callback forEachCallback
+ * @param {*} value 值。
+ * @param {*} rowKey  row 鍵值。
+ * @param {*} columnKey column 鍵值。
+ */
+
+/**
+ * 此 callback 會在遍歷每一個 column key 時被呼叫一次。
+ *
+ * @callback forEachColumnKeyCallback
+ * @param {*} columnKey column 鍵值。
+ */
+
+/**
+ * 此 callback 會在遍歷每一個 row key 時被呼叫一次。
+ *
+ * @callback forEachRowCallback
+ * @param {*} row row 所有值的陣列。
+ * @param {*} rowKey row 鍵值。
+ */
+
+/**
+ * 此 callback 會在遍歷每一個 row key 時被呼叫一次。
+ *
+ * @callback forEachRowKeyCallback
+ * @param {*} rowKey row 鍵值。
+ */
+
+/**
+ * @class DynamicMatrix 二維矩陣。
+ * @param {configObject} config 設定物件。預設為 {
+ *   defaultValue: 0,
+ *   strictMode: false
+ * }
+ * @example
+ * let m1 = new DynamicMatrix()
+ * let m2 = new DynamicMatrix({defaultValue: 1})
+ * let m3 = new DynamicMatrix({strictMode: true})
+ * let m4 = new DynamicMatrix(
+ * {
+ *   defaultValue: 1,
+ *   strictMode: true
+ * })
+ */
+class DynamicMatrix {
+  #config
+  #rows
+  #columnKeys
+
+  constructor (config) {
+    this.#config = config || defaultConfig
+    this.#rows = new Map()
+    this.#columnKeys = new Map()
+  }
+
+  /**
+   * 驗證 columnKey 是否有效以及是否存在。
+   * @throws {InvalidParameterException}
+   * @throws {KeyNotExistsException}
+   * @param {*} columnKey column 鍵值。
+   */
+  #checkColumnKey (columnKey) {
+    if (!columnKey) {
+      throw new InvalidParameterException(`參數 columnKey 不可以為 undefined!`)
+    }
+    if (!this.#columnKeys.has(columnKey)) {
+      throw new KeyNotExistsException(`columnKey ${columnKey} 不存在!`)
+    }
+  }
+
+  /**
+   * 確認 rowKey 是否有效以及是否存在。
+   * @throws {InvalidParameterException}
+   * @throws {KeyNotExistsException}
+   * @param {*} rowKey row 鍵值。
+   */
+  #checkRowKey (rowKey) {
+    if (!rowKey) {
+      throw new InvalidParameterException(`參數 rowKey 不可以為 undefined!`)
+    }
+    if (!this.#rows.has(rowKey)) {
+      throw new KeyNotExistsException(`參數 rowKey ${rowKey} 不存在!`)
+    }
+  }
+
+  /**
+   * 如果 rowKey不存在則建立新的 row。
+   * @param {*} rowKey roe 鍵值。
+   * @return {Map&lt;any, any>}
+   */
+  #createRowIfNotExists (rowKey) {
+    let row = this.#rows.get(rowKey)
+    if (!row) {
+      row = new Map()
+      this.#rows.set(rowKey, row)
+    }
+    return row
+  }
+
+  /**
+   * 清除所有元素，columnCount 與 rowCount 歸零。
+   * @return {DynamicMatrix} 回傳物件本身。
+   * @example
+   * let m = new DynamicMatrix()
+   * m.set(1,1,2)
+   *  .set(1,2,3)
+   *  .clear()
+   */
+  clear () {
+    this.#rows.forEach(row => row.clear())
+    this.#rows.clear()
+    this.#columnKeys.clear()
+    return this
+  }
+
+  /**
+   * 取得 column 全部值的陣列。
+   * @param columnKey column 鍵值。
+   * @returns {*} 一個全部值的陣列。
+   * @example
+   * let m = new DynamicMatrix()
+   * m.set(1, 1, 3)
+   * m.set(2, 1, 4)
+   * m.set(3, 1, 5)
+   * console.log(m.columnValues(1)) // [3,4,5]
+   */
+  column (columnKey) {
+    let result = []
+    this.#rows.forEach((row) => result.push(row.get(columnKey)))
+    return result
+  }
+
+  /**
+   * 回傳 column 數目。
+   * @returns {number} column 數目。
+   * @example
+   * let m = new DynamicMatrix()
+   * m.set(1, 1, 'A')
+   * m.set(1, 2, 'B')
+   * console.log(m.ColumnCount) // 2
+   */
+  columnCount () {
+    return this.#columnKeys.size
+  }
+
+  /**
+   * 回傳某一個 column 值的加總。
+   * @param columnKey column 鍵值。
+   * @returns {number} column 值的加總。
+   * @throws {InvalidParameterException}
+   * @throws {KeyNotExistsException}
+   * @example
+   * let m = new DynamicMatrix()
+   * m.set(1, 1, 3)
+   * m.set(2, 1, 4)
+   * m.set(3, 1, 5)
+   * console.log(m.columnSum(1)) // 12
+   * m.clear()
+   * m.set(1, 1, 'A')
+   * m.set(2, 1, 'B')
+   * m.set(3, 1, 'C')
+   * console.log(m.columnSum(1)) // 'ABC'
+   */
+  columnSum (columnKey) {
+    this.#checkColumnKey(columnKey)
+    let result = this.#config.defaultValue
+    this.#rows.forEach((rowValue) => result += rowValue.get(columnKey) || this.#config.defaultValue)
+    return result
+  }
+
+  /**
+   * 用 value 填滿整個矩陣。
+   * @param {*} value 要填入的值。
+   * @return {DynamicMatrix} 回傳物件本身。
+   * @example
+   * let m = new DynamicMatrix()
+   *     m.setRow(1, [1, 2, 3])
+   *      .setRow(2, [1, 2, 3])
+   *      .setRow(3, [1, 2, 3])
+   *     m.fill(1)
+   */
+  fill (value) {
+    this.#rows.forEach((row) => {
+      row.forEach((column, columnKey) => row.set(columnKey, value))
+    })
+    return this
+  }
+
+  /**
+   * 遍歷每一個值時會呼叫 callback 一次。
+   * @param {forEachCallback} callback 回呼函數。
+   * @return {DynamicMatrix} 回傳物件本身。
+   * @throws {InvalidParameterException}
+   * @example
+   * let m = new DynamicMatrix()
+   * m.set(1, 1, 1)
+   *  .set(2, 1, 2)
+   *  .set(3, 1, 3)
+   *  .set(1, 2, 2)
+   *  .set(2, 2, 3)
+   *  .set(3, 2, 4)
+   *  .set(1, 3, 3)
+   *  .set(2, 3, 4)
+   *  .set(3, 3, 5)
+   *
+   * let sum = 0
+   * m.forEach((value) => sum += value)
+   * console.log(sum) // 27
+   */
+  forEach (callback) {
+    if (Type.isNotFunction(callback)) {
+      throw new InvalidParameterException('callback 必須是函數。')
+    }
+    this.#rows.forEach((row, rowKey) => {
+      row.forEach((column, columnKey) => callback(row.get(columnKey), rowKey, columnKey))
+    })
+    return this
+  }
+
+  /**
+   * 遍歷每一個 column key 時會呼叫 callback 一次。
+   * @param {forEachColumnKeyCallback} callback 回呼函數。
+   * @return {DynamicMatrix} 回傳物件本身。
+   * @throws {InvalidParameterException}
+   * @example
+   * let m = new DynamicMatrix()
+   * m.set(1, 'A', 1)
+   * m.set(2, 'B', 2)
+   * m.set(3, 'C', 3)
+   *
+   * let keys = []
+   * m.forEachColumnKey((columnKey) => keys.push(columnKey))
+   * console.log(keys) // ['A', 'B', 'C'])
+   */
+  forEachColumnKey (callback) {
+    if (Type.isNotFunction(callback)) {
+      throw new InvalidParameterException('callback 必須是函數。')
+    }
+    this.#columnKeys.forEach((value, key) => callback(key))
+    return this
+  }
+
+  /**
+   * 遍歷每一個 column，每次回傳整個 column 的值。
+   * @param {forEachColumnCallback} callback 回呼函數。
+   * @throws {InvalidParameterException}
+   * @return {DynamicMatrix} 回傳物件本身。
+   */
+  forEachColumnValues (callback) {
+    if (Type.isNotFunction(callback)) {
+      throw new InvalidParameterException('callback 必須是函數。')
+    }
+    this.#columnKeys.forEach((value, columnKey) => callback(this.column(columnKey), columnKey))
+    return this
+  }
+
+  /**
+   *
+   * @param {forEachRowCallback} callback 回呼函數。
+   * @return {DynamicMatrix} 回傳物件本身。
+   * @throws {InvalidParameterException}
+   * @example
+   * let m = new DynamicMatrix()
+   * m.set(1, 1, 1)
+   * m.set(2, 1, 2)
+   * m.set(3, 1, 3)
+   *
+   * m.set(1, 2, 2)
+   * m.set(2, 2, 3)
+   * m.set(3, 2, 4)
+   *
+   * m.set(1, 3, 3)
+   * m.set(2, 3, 4)
+   * m.set(3, 3, 5)
+   *
+   * let sum = 0
+   * m.forEachRow((values) => {
+   *   sum += values.reduce((previousValue, currentValue) => previousValue + currentValue, 0)
+   * })
+   *
+   * console.log(sum) // 27
+   */
+  forEachRow (callback) {
+    if (Type.isNotFunction(callback)) {
+      throw new InvalidParameterException('參數 callback 應為函數。')
+    }
+    this.#rows.forEach((row, rowKey) => callback(this.row(rowKey), rowKey))
+    return this
+  }
+
+  /**
+   * 遍歷每一個 rowKey。
+   * @param {forEachRowKeyCallback} callback
+   * @return {DynamicMatrix} 回傳物件本身。
+   * @throws {InvalidParameterException}
+   * @example
+   * let m = new DynamicMatrix()
+   * m.set('A', 1, 1)
+   * m.set('B', 2, 2)
+   * m.set('C', 3, 3)
+   *
+   * let keys = []
+   * m.forEachRowKey((rowKey) => keys.push(rowKey))
+   * console.log(keys) //['A', 'B', 'C']
+   */
+  forEachRowKey (callback) {
+    if (Type.isNotFunction(callback)) {
+      throw new InvalidParameterException('參數 callback 應為函數。')
+    }
+    for (const key of this.#rows.keys()) {
+      callback(key)
+    }
+    return this
+  }
+
+  /**
+   * 取得指定位置的元素。如果該元素是物件，你會取得該物件的參考，因此你對該物件做的修改動，
+   * 會立即修改矩陣中的物件。
+   * @param {*} rowKey row 鍵值。
+   * @param {*} columnKey column 鍵值。
+   * @return {*}
+   */
+  get (rowKey, columnKey) {
+    let row = this.#rows.get(rowKey)
+    if (!row) {
+      return this.#config.defaultValue
+    }
+    return row.get(columnKey) || this.#config.defaultValue
+  }
+
+  /**
+   * 取得 row 全部值的陣列。
+   * @param {*} rowKey row 鍵值。
+   * @return {*} 一個全部值的陣列。
+   * @example
+   * let m = new DynamicMatrix()
+   *     m.set(1, 1, 1)
+   *     m.set(1, 2, 2)
+   *     m.set(1, 3, 3)
+   * console.log(m.row(1)) // [1, 2, 3]
+   */
+  row (rowKey) {
+    let result = []
+    let row = this.#rows.get(rowKey)
+    if (!row) {
+      this.#columnKeys.forEach(() => {result.push(this.#config.defaultValue)})
+      return result
+    }
+    this.#columnKeys.forEach((value, columnKey) => {
+      result.push(row.get(columnKey) || this.#config.defaultValue)
+    })
+    return result
+  }
+
+  /**
+   * row 數量。
+   * @return {number} row 數量。
+   * @example
+   * let m = new DynamicMatrix()
+   *     m.set(1, 1, 1)
+   *     m.set(2, 2, 2)
+   *     m.set(3, 3, 3)
+   *  console.log(m.rowCount()) // 3
+   */
+  rowCount () {
+    return this.#rows.size
+  }
+
+  /**
+   * 計算 row 的加總。
+   * @param {*} rowKey row 鍵值。
+   * @return {*} 加總結果。
+   * @example
+   * let m = new DynamicMatrix()
+   *     m.set(1, 1, 1)
+   *     m.set(1, 2, 2)
+   *     m.set(1, 3, 3)
+   * console.log(m.rowSum(1)) // 6
+   *
+   * let n = new DynamicMatrix({defaultValue: ''})
+   *     n.set(1, 1, 'a')
+   *     n.set(1, 2, 'b')
+   *     n.set(1, 3, 'c')
+   * console.log(n.rowSum(1)) // 'abc'
+   */
+  rowSum (rowKey) {
+    this.#checkRowKey(rowKey)
+    let row = this.#rows.get(rowKey)
+    let result = this.#config.defaultValue
+    row.forEach(columnValue => result += columnValue)
+    return result
+  }
+
+  /**
+   * 賦值給 Cell。
+   * @param {*} rowKey row 鍵值。
+   * @param {*} columnKey column 鍵值。
+   * @param {*} value 要寫入的值。
+   * @return {DynamicMatrix} 回傳物件本身。
+   * @example
+   * let m = new DynamicMatrix()
+   * m.set('a', 1) = [1,2,3]
+   */
+  set (rowKey, columnKey, value) {
+    if (!rowKey) {
+      return this
+    }
+    if (!columnKey) {
+      return this
+    }
+    let row = this.#rows.get(rowKey)
+    if (!row) {
+      row = new Map()
+      this.#rows.set(rowKey, row)
+    }
+    row.set(columnKey, value)
+    this.#columnKeys.set(columnKey, true)
+    return this
+  }
+
+  /**
+   * 用陣列的值填入 column。
+   * @param {*} columnKey column 鍵值。
+   * @param {*} values 資料陣列。
+   * @return {DynamicMatrix}
+   * @throws {InvalidParameterException}
+   * @example
+   * let m = new DynamicMatrix()
+   *     m.set(1, 1, 1)
+   *      .set(2, 1, 2)
+   *      .set(3, 1, 3)
+   *      .set(4, 1, 4)
+   *      .set(5, 1, 5)
+   *      .setColumn(1, ['D', 'E', 'F']) // column(1) = ['D', 'E', 'F', 4, 5]
+   */
+  setColumn (columnKey, values) {
+    if (Type.isNotArray(values)) {
+      throw new InvalidParameterException('參數 values 必須是陣列型態!')
+    }
+
+    // 將 values 放到目前 column 的位置
+    let i = this.#rows.keys()
+    let rowKey = i.next().value
+    while (rowKey &amp;&amp; values.length > 0) {
+      this.#rows.get(rowKey).set(columnKey, values.shift())
+      rowKey = i.next().value
+    }
+
+    // 當 values 的數量比目前的 row 多時，用現在時間作為新的 row key
+    if (values.length > 0) {
+      let rowKey = Date.now()
+      while (values.length > 0) {
+        this.set(String(rowKey), columnKey, values.shift())
+        rowKey++
+      }
+    }
+    return this
+  }
+
+  /**
+   * 用陣列的值填入 row。
+   * @param {*} rowKey row 鍵值。
+   * @param {*} values 資料陣列。
+   * @return {DynamicMatrix}
+   * @throws {InvalidParameterException}
+   * @example
+   * let m = new DynamicMatrix()
+   *     m.set(1, 1, 1)
+   *      .set(1, 2, 2)
+   *      .set(1, 3, 3)
+   *      .set(1, 4, 4)
+   *      .set(1, 5, 5)
+   *      .setRow(1, ['D', 'E', 'F', 4, 5])
+   */
+  setRow (rowKey, values) {
+    if (Type.isNotArray(values)) {
+      throw new InvalidParameterException('參數 values 必須是陣列型態!')
+    }
+
+    let row = this.#createRowIfNotExists(rowKey)
+    let i = this.#columnKeys.keys()
+    let key = i.next().value
+    while (key &amp;&amp; values.length > 0) {
+      row.set(key, values.shift())
+      key = i.next().value
+    }
+
+    // 當 values 的數量比目前的 column 多時，用現在時間作為新的 column key
+    if (values.length > 0) {
+      let newColumnKey = Date.now()
+      while (values.length > 0) {
+        this.set(rowKey, String(newColumnKey), values.shift())
+        newColumnKey++
+      }
+    }
+    return this
+  }
+
+  /**
+   * 所有元素的加總。如果矩陣是空的，會回傳 undefined。
+   * @return {*}
+   * @example
+   * let m = new DynamicMatrix()
+   * m.setRow(1, [1, 1, 1])
+   * m.setRow(2, [1, 1, 1])
+   * m.setRow(3, [1, 1, 1])
+   * console.log(m.sum()) // 9
+   *
+   * m.setRow(1, ['a', 'b', 'c'])
+   * m.setRow(2, ['d', 'e', 'f'])
+   * m.setRow(3, ['g', 'h', 'i'])
+   * console.log(m.sum()) // abcdefghi
+   */
+  sum () {
+    if (this.#rows.size === 0) {
+      return undefined
+    }
+    let result = this.#config.defaultValue
+    this.forEach(value => result += value)
+    return result
+  }
+
+  /**
+   * 將矩陣轉為 2 維陣列。
+   * @return {*}
+   * @example
+   * let m = new DynamicMatrix()
+   * m.setRow(1, [1, 2, 3])
+   * m.setRow(2, [4, 5, 6])
+   * m.setRow(3, [7, 8, 9])
+   * console.log(m.toArray()) // [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+   */
+  toArray () {
+    let result = []
+    this.forEachRow(values => result.push(values))
+    return result
+  }
+}
+
+module.exports = { DynamicMatrix }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    </div>
+
+    <footer class="footer" id="footer">
+      
+    </footer>
+
+    <script src="scripts/third-party/prettify.js"></script>
+    <script src="scripts/third-party/lang-css.js"></script>
+    <script type="text/javascript" src="scripts/misc.js"></script>
+
+    <script>prettyPrint();</script>
+    <script src="scripts/linenumber.js"></script>
+    <script src="scripts/fix-code-block.js"></script>
+    <script src="scripts/fix-navbar.js"></script>
+    
+      <script src="scripts/search.js"></script>
+      <script src="scripts/third-party/fuse.js"></script>
+      <script>
+        var list = [{"title":"Exceptions","link":"<a href=\"module-Exceptions.html\">Exceptions</a>"},{"title":"StrUtils","link":"<a href=\"module-StrUtils.html\">StrUtils</a>"},{"title":"module:StrUtils~coOccurrences","link":"<a href=\"module-StrUtils.html#~coOccurrences\">module:StrUtils~coOccurrences &rtrif; undefined</a>"},{"title":"Type","link":"<a href=\"module-Type.html\">Type</a>"},{"title":"Bits","link":"<a href=\"Bits.html\">Bits</a>"},{"title":"Bits#forEach","link":"<a href=\"Bits.html#forEach\">Bits &rtrif; forEach</a>"},{"title":"DynamicMatrix","link":"<a href=\"DynamicMatrix.html\">DynamicMatrix</a>"},{"title":"DynamicMatrix#clear","link":"<a href=\"DynamicMatrix.html#clear\">DynamicMatrix &rtrif; clear</a>"},{"title":"DynamicMatrix#column","link":"<a href=\"DynamicMatrix.html#column\">DynamicMatrix &rtrif; column</a>"},{"title":"DynamicMatrix#columnCount","link":"<a href=\"DynamicMatrix.html#columnCount\">DynamicMatrix &rtrif; columnCount</a>"},{"title":"DynamicMatrix#columnSum","link":"<a href=\"DynamicMatrix.html#columnSum\">DynamicMatrix &rtrif; columnSum</a>"},{"title":"DynamicMatrix#fill","link":"<a href=\"DynamicMatrix.html#fill\">DynamicMatrix &rtrif; fill</a>"},{"title":"DynamicMatrix#forEach","link":"<a href=\"DynamicMatrix.html#forEach\">DynamicMatrix &rtrif; forEach</a>"},{"title":"DynamicMatrix#forEachColumnKey","link":"<a href=\"DynamicMatrix.html#forEachColumnKey\">DynamicMatrix &rtrif; forEachColumnKey</a>"},{"title":"DynamicMatrix#forEachColumnValues","link":"<a href=\"DynamicMatrix.html#forEachColumnValues\">DynamicMatrix &rtrif; forEachColumnValues</a>"},{"title":"DynamicMatrix#forEachRow","link":"<a href=\"DynamicMatrix.html#forEachRow\">DynamicMatrix &rtrif; forEachRow</a>"},{"title":"DynamicMatrix#forEachRowKey","link":"<a href=\"DynamicMatrix.html#forEachRowKey\">DynamicMatrix &rtrif; forEachRowKey</a>"},{"title":"DynamicMatrix#get","link":"<a href=\"DynamicMatrix.html#get\">DynamicMatrix &rtrif; get</a>"},{"title":"DynamicMatrix#row","link":"<a href=\"DynamicMatrix.html#row\">DynamicMatrix &rtrif; row</a>"},{"title":"DynamicMatrix#rowCount","link":"<a href=\"DynamicMatrix.html#rowCount\">DynamicMatrix &rtrif; rowCount</a>"},{"title":"DynamicMatrix#rowSum","link":"<a href=\"DynamicMatrix.html#rowSum\">DynamicMatrix &rtrif; rowSum</a>"},{"title":"DynamicMatrix#set","link":"<a href=\"DynamicMatrix.html#set\">DynamicMatrix &rtrif; set</a>"},{"title":"DynamicMatrix#setColumn","link":"<a href=\"DynamicMatrix.html#setColumn\">DynamicMatrix &rtrif; setColumn</a>"},{"title":"DynamicMatrix#setRow","link":"<a href=\"DynamicMatrix.html#setRow\">DynamicMatrix &rtrif; setRow</a>"},{"title":"DynamicMatrix#sum","link":"<a href=\"DynamicMatrix.html#sum\">DynamicMatrix &rtrif; sum</a>"},{"title":"DynamicMatrix#toArray","link":"<a href=\"DynamicMatrix.html#toArray\">DynamicMatrix &rtrif; toArray</a>"},{"title":"Matrix","link":"<a href=\"Matrix.html\">Matrix</a>"},{"title":"Matrix#clear","link":"<a href=\"Matrix.html#clear\">Matrix &rtrif; clear</a>"},{"title":"Matrix#column","link":"<a href=\"Matrix.html#column\">Matrix &rtrif; column</a>"},{"title":"Matrix#fill","link":"<a href=\"Matrix.html#fill\">Matrix &rtrif; fill</a>"},{"title":"Matrix#forEachColumn","link":"<a href=\"Matrix.html#forEachColumn\">Matrix &rtrif; forEachColumn</a>"},{"title":"Matrix#forEachRow","link":"<a href=\"Matrix.html#forEachRow\">Matrix &rtrif; forEachRow</a>"},{"title":"Matrix#identity","link":"<a href=\"Matrix.html#identity\">Matrix &rtrif; identity</a>"},{"title":"Matrix#isSquare","link":"<a href=\"Matrix.html#isSquare\">Matrix &rtrif; isSquare</a>"},{"title":"Matrix#multiply","link":"<a href=\"Matrix.html#multiply\">Matrix &rtrif; multiply</a>"},{"title":"Matrix#resize","link":"<a href=\"Matrix.html#resize\">Matrix &rtrif; resize</a>"},{"title":"Matrix#row","link":"<a href=\"Matrix.html#row\">Matrix &rtrif; row</a>"},{"title":"Matrix#subtract","link":"<a href=\"Matrix.html#subtract\">Matrix &rtrif; subtract</a>"},{"title":"IndexOutOfRangeException","link":"<a href=\"module-Exceptions-IndexOutOfRangeException.html\">IndexOutOfRangeException</a>"},{"title":"InvalidParameterException","link":"<a href=\"module-Exceptions-InvalidParameterException.html\">InvalidParameterException</a>"},{"title":"KeyNotExistsException","link":"<a href=\"module-Exceptions-KeyNotExistsException.html\">KeyNotExistsException</a>"},{"title":"TextFile","link":"<a href=\"TextFile.html\">TextFile</a>"},{"title":"TextFile#append","link":"<a href=\"TextFile.html#append\">TextFile &rtrif; append</a>"},{"title":"TextFile#readAll","link":"<a href=\"TextFile.html#readAll\">TextFile &rtrif; readAll</a>"},{"title":"TextFile#rewrite","link":"<a href=\"TextFile.html#rewrite\">TextFile &rtrif; rewrite</a>"},{"title":"TextFile#write","link":"<a href=\"TextFile.html#write\">TextFile &rtrif; write</a>"},{"title":"TextFile#writeLine","link":"<a href=\"TextFile.html#writeLine\">TextFile &rtrif; writeLine</a>"},{"title":"Vector","link":"<a href=\"Vector.html\">Vector</a>"},{"title":"Vector#add","link":"<a href=\"Vector.html#add\">Vector &rtrif; add</a>"},{"title":"Vector#cross","link":"<a href=\"Vector.html#cross\">Vector &rtrif; cross</a>"},{"title":"Vector#dot","link":"<a href=\"Vector.html#dot\">Vector &rtrif; dot</a>"},{"title":"Vector#norm","link":"<a href=\"Vector.html#norm\">Vector &rtrif; norm</a>"},{"title":"Vector#scaleBy","link":"<a href=\"Vector.html#scaleBy\">Vector &rtrif; scaleBy</a>"},{"title":"Vector#subtract","link":"<a href=\"Vector.html#subtract\">Vector &rtrif; subtract</a>"},{"title":"Vector#sum","link":"<a href=\"Vector.html#sum\">Vector &rtrif; sum</a>"},{"title":"configObject","link":"<a href=\"global.html#configObject\">configObject</a>"},{"title":"defaultConfig","link":"<a href=\"global.html#defaultConfig\">defaultConfig</a>"},{"title":"forEachCallback","link":"<a href=\"global.html#forEachCallback\">forEachCallback</a>"},{"title":"forEachColumnCallback","link":"<a href=\"global.html#forEachColumnCallback\">forEachColumnCallback</a>"},{"title":"forEachColumnKeyCallback","link":"<a href=\"global.html#forEachColumnKeyCallback\">forEachColumnKeyCallback</a>"},{"title":"forEachRowCallback","link":"<a href=\"global.html#forEachRowCallback\">forEachRowCallback</a>"},{"title":"forEachRowKeyCallback","link":"<a href=\"global.html#forEachRowKeyCallback\">forEachRowKeyCallback</a>"}];
+        var options = 
+          setupSearch(list, options)
+      </script>
+    
+
+    
+
+    
+
+    
+
+
+  </body>
+
+</html>
