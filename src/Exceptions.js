@@ -33,20 +33,8 @@ class InvalidParameterException extends Error {
   }
 }
 
-/**
- * @class
- */
-class TypeError extends Error {
-  constructor (message) {
-    super(message)
-    this.name = this.constructor.name
-    Error.captureStackTrace(this, this.constructor)
-  }
-}
-
 module.exports = {
   KeyNotExistsException,
   IndexOutOfRangeException,
   InvalidParameterException,
-  TypeError
 }

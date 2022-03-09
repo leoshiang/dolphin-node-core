@@ -1,11 +1,9 @@
 const Vector = require('./Vector')
-const { re } = require('@babel/core/lib/vendor/import-meta-resolve')
 
 class Matrix extends Array {
 
   #columns
   #rows
-  #columnCache
 
   constructor (rows, columns) {
     super()
@@ -47,18 +45,12 @@ class Matrix extends Array {
     }
     this.#rows = 0
     this.#columns = 0
-    this.#columnCache = []
     return this
   }
 
   column (column) {
-    let result = this.#columns[column]
-    if (result) {
-      return result
-    }
-    result = new Vector(this.#rows)
+    let result = new Vector(this.#rows)
     this.forEach((row, index) => result[index] = row[column])
-    this.#columnCache[column] = result
     return result
   }
 
