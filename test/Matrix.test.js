@@ -261,3 +261,14 @@ describe('測試 subtract', () => {
     expect(m3[1][1]).toBe(0)
   })
 })
+
+describe('測試 sum', () => {
+  test('[1,2][3,4] + [1,2][3,4] 應等於[2,4][6,8]', () => {
+    let m1 = new Matrix(2, 2)
+    m1[0][0] = 1
+    m1[0][1] = 2
+    m1[1][0] = 3
+    m1[1][1] = 4
+    expect(m1.sum()).toBe(10)
+  })
+})

@@ -306,6 +306,20 @@ class Matrix extends Array {
     }
     return result
   }
+
+  /**
+   * 所有元素的加總。
+   * @return {number}
+   */
+  sum () {
+    let result = 0
+    for (let row = 0; row < this.#rows; row++) {
+      for (let column = 0; column < this.#columns; column++) {
+        result += (this[row][column] || 0)
+      }
+    }
+    return result
+  }
 }
 
 module.exports = { Matrix }
