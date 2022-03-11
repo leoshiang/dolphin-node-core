@@ -1,6 +1,6 @@
-# node-dolphin
+# dolphin-node-core
 
-node-dolphin 是一個 npm 套件，包含了一些常用的 JavaScript 物件集合，例如：型別處理、矩陣、動態矩陣、位元陣列。
+dolphin-node-core 是一個 npm 套件，包含了一些常用的 JavaScript 物件集合，例如：型別處理、向量、矩陣、動態矩陣、位元陣列。
 
 ## 特色
 
@@ -12,13 +12,13 @@ node-dolphin 是一個 npm 套件，包含了一些常用的 JavaScript 物件�
 
 ## 文件
 
-[詳細的 JSDoc 說明](https://leoshiang.github.io/node-dolphin/)。
+[詳細的 JSDoc 說明](https://leoshiang.github.io/dolphin-node-core/)。
 
 簡要的說明：
 * [Matrix](md/matrix.md)
 ## 下載
 ```bash
-npm install node-dolphin
+npm install dolphin-node-core
 ```
 
 ## 測試

@@ -14,7 +14,7 @@ const Types = {
 }
 
 const getType = (obj) => Object.prototype.toString.call(obj)
-  .slice(8, -1)
+                               .slice(8, -1)
 const isArray = (obj) => getType(obj) === Types.Array
 const isBoolean = (obj) => getType(obj) === Types.Boolean
 const isDate = (obj) => getType(obj) === Types.Date

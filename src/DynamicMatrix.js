@@ -69,9 +69,9 @@ const defaultConfig = {
  * })
  */
 class DynamicMatrix {
+  #columnKeys
   #config
   #rows
-  #columnKeys
 
   constructor (config) {
     this.#config = config || defaultConfig
@@ -190,7 +190,8 @@ class DynamicMatrix {
   columnSum (columnKey) {
     this.#checkColumnKey(columnKey)
     let result = this.#config.defaultValue
-    this.#rows.forEach((rowValue) => result += rowValue.get(columnKey) || this.#config.defaultValue)
+    this.#rows.forEach((rowValue) => result += rowValue.get(columnKey) ||
+      this.#config.defaultValue)
     return result
   }
 
@@ -238,7 +239,9 @@ class DynamicMatrix {
       throw new InvalidParameterException('callback 必須是函數。')
     }
     this.#rows.forEach((row, rowKey) => {
-      row.forEach((column, columnKey) => callback(row.get(columnKey), rowKey, columnKey))
+      row.forEach((column, columnKey) => callback(row.get(columnKey),
+                                                  rowKey,
+                                                  columnKey))
     })
     return this
   }
@@ -276,7 +279,8 @@ class DynamicMatrix {
     if (Type.isNotFunction(callback)) {
       throw new InvalidParameterException('callback 必須是函數。')
     }
-    this.#columnKeys.forEach((value, columnKey) => callback(this.column(columnKey), columnKey))
+    this.#columnKeys.forEach((value, columnKey) => callback(this.column(
+      columnKey), columnKey))
     return this
   }
 
@@ -301,7 +305,8 @@ class DynamicMatrix {
    *
    * let sum = 0
    * m.forEachRow((values) => {
-   *   sum += values.reduce((previousValue, currentValue) => previousValue + currentValue, 0)
+   *   sum += values.reduce((previousValue, currentValue) => previousValue +
+   *   currentValue, 0)
    * })
    *
    * console.log(sum) // 27

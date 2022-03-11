@@ -79,5 +79,5 @@ class TextFile {
 module.exports = {
   TextFile,
   WriteMode,
-  AppendMode
+  AppendMode,
 }

@@ -12,10 +12,4 @@ describe('測試 contains', function () {
     const sentence = '天氣很好'
     expect(StrUtils.includes(sentence, words)).toBe(false)
   })
-
-  test('兩個中文詞彙只有一個出現在句子，應回傳 false', function () {
-    const words = ['便宜', '好吃']
-    const sentence = '提供衛生與美味的食物雖然每次都要等很久但CP值超高便宜又好吃'
-    expect(StrUtils.includes(sentence, words)).toBe(false)
-  })
 })

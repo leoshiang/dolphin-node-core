@@ -93,11 +93,13 @@ describe('測試 scaleBy', function () {
 })
 
 describe('測試 subtract', function () {
-  test('傳入長度相同的陣列，應將自身的元素加上陣列元素', function () {
-    const v = new Vector([1, 2, 3]).subtract(new Vector([4, 5, 6]))
-    expect(v[0]).toBe(-3)
-    expect(v[1]).toBe(-3)
-    expect(v[2]).toBe(-3)
+  test('[1, 2, 3] - [4, 5, 6] 應等於 [-3, -3, -3]', function () {
+    const v1 = new Vector([1, 2, 3])
+    const v2 = new Vector([4, 5, 6])
+    const v3 = v1.subtract(v2)
+    expect(v3[0]).toBe(-3)
+    expect(v3[1]).toBe(-3)
+    expect(v3[2]).toBe(-3)
   })
 })
 

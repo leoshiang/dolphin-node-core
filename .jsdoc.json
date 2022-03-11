@@ -9,7 +9,7 @@
     "excludePattern": "(node_modules/|docs)"
   },
   "templates": {
-    "referenceTitle": "Node-Dolphin",
+    "referenceTitle": "dolphin-node-core",
     "disableSort": false,
     "collapse": true,
     "resources": {

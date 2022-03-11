@@ -6,7 +6,7 @@ const Type = require('./Type')
  * 此 callback 會在遍歷每一個 column 時被呼叫一次。
  *
  * @callback forEachColumnCallback
- * @param {*} value 值。
+ * @param {*} value 向量。
  * @param {*} column  column 編號。
  */
 
@@ -39,11 +39,18 @@ class Matrix extends Array {
 
   /**
    * @constructor
-   * @param {number|Array} rows 列數。
+   * @param {number|Array} [rows] 列數。
    * @param {number|Array} [columns]
    * @param {number} [defaultValue]
+   * @example
+   * let m1 = new Matrix() // []
+   * let m2 = new Matrix(2, 2) // [[0, 0], [0, 0]]
+   * let m3 = new Matrix([2, 3, 1],
+   *                     [4, 7, 2],
+   *                     [3, 1, 1]) // [[2, 3, 1], [4, 7, 2], [3, 1, 1]]
+   * let m4 = new Matrix([2, 3, 1], 1, [3, 1, 1]) // [[2, 3, 1], [3, 1, 1]]
    */
-  constructor (rows, columns, defaultValue) {
+  constructor (rows = 0, columns = 0, defaultValue) {
     super()
     this.clear()
     this.#defaultValue = Type.isUndefined(defaultValue)
@@ -113,6 +120,15 @@ class Matrix extends Array {
     this.#columns = dimension.columns
   }
 
+  /**
+   * 與另一個矩陣相加。
+   * @param other
+   * @return {Matrix} 新矩陣。
+   * @example
+   * let m1 = new Matrix([1, 2], [3, 4])
+   * let m2 = new Matrix([5, 6], [7, 8])
+   * let m3 = m1.add(m2) // [[6, 8],[10, 12]]
+   */
   add (other) {
     let result = new Matrix(this.#rows, this.#columns)
     for (let row = 0; row < this.#rows; row++) {
@@ -125,21 +141,24 @@ class Matrix extends Array {
 
   /**
    * 清除矩陣。
-   * @return {Matrix} 回傳矩陣本身。
+   * @return {Matrix} 矩陣本身。
+   * @example
+   * let m = new Matrix(2, 2).clear()
    */
   clear () {
-    while (this.length > 0) {
-      this.pop()
-    }
+    this.length = 0
     this.#rows = 0
     this.#columns = 0
     return this
   }
 
   /**
-   * 取得一整列（column）的值。
+   * 取得一整行（column）的值。
    * @param {number} column 列編號，從 0 開始。
-   * @return {Vector}
+   * @return {Vector} 回傳向量。
+   * @example
+   * let m = new Matrix([1, 2], [3, 4])
+   * console.log(m.column(0)) // [2, 4]
    */
   column (column) {
     let result = new Vector(this.#rows)
@@ -149,7 +168,10 @@ class Matrix extends Array {
 
   /**
    * 填入數值。
-   * @param number
+   * @param {number} number 要填入的數值。
+   * @return {Vector} 矩陣本身。
+   * @example
+   * let m = new Matrix(2, 2).fill(2)
    */
   fill (number) {
     this.forEach(row => row.fill(number))
@@ -157,10 +179,9 @@ class Matrix extends Array {
   }
 
   /**
-   * 遍歷每一個 column。
+   * 遍歷每一行（column）。
    * @param {forEachColumnCallback} callback 回呼函數。
-   * @return {Matrix}
-   * @throws {TypeError}
+   * @return {Matrix} 矩陣本身。
    * @example
    * new Matrix(3, 3).fill(1).forEachColumn((x) => console.log(x))
    */
@@ -172,10 +193,9 @@ class Matrix extends Array {
   }
 
   /**
-   * 遍歷每一個 row。
+   * 遍歷每一列（row）。
    * @param {forEachRowCallback} callback 回呼函數。
-   * @return {Matrix}
-   * @throws {InvalidParameterException}
+   * @return {Matrix} 矩陣本身。
    * @example
    * new Matrix(3, 3).fill(1).forEachRow((x) => console.log(x))
    */
@@ -204,25 +224,14 @@ class Matrix extends Array {
   }
 
   /**
-   * 判斷是否為方陣。
-   * @return {boolean}
-   */
-  isSquare () {
-    return this.#columns === this.#rows
-  }
-
-  /**
    * 與另一個矩陣或數值乘。
    * @param {number|Matrix} other
-   * @return {Matrix}
+   * @return {Matrix} 新矩陣。
+   * @throws {TypeError} 當參數 other 不是 Matrix 時，會拋出此例外。
    * @example
-   * let m = new Matrix(3, 3).fill(1).mul(1)
-   *
-   * let n = new Matrix(3, 3)
-   * n.setRow(0, [1, 2, 3])
-   * n.setRow(1, [2, 3, 4])
-   * n.setRow(2, [3, 4, 5])
-   * n.mul(m)
+   * let m = new Matrix([1, 2], [3, 4], [5, 6])
+   * let n = new Matrix([1, 2, 3, 4], [5, 6, 7, 8])
+   * let result = m.multiply(n)
    */
   multiply (other) {
     if (!(other instanceof Matrix)) {
@@ -249,7 +258,9 @@ class Matrix extends Array {
    * 調整大小。
    * @param {number} rows 列數。
    * @param {number} columns 行數。
-   * @return {Matrix} 回傳矩陣本身。
+   * @return {Matrix} 矩陣本身。
+   * @example
+   * let m = new Matrix(2, 2).fill(2).resize(3, 3)
    */
   resize (rows, columns) {
     let numberOfRowsToChange = this.#rows - rows
@@ -286,16 +297,35 @@ class Matrix extends Array {
   /**
    * 取得一整行（row）的值。
    * @param {number} rowIndex 行編號，從 0 開始。
-   * @return {Vector}
+   * @return {Vector} 回傳向量。
+   * @example
+   * let m = new Matrix(2, 2)
+   * m[0][0] = 1
+   * m[0][1] = 2
+   * m[1][0] = 3
+   * m[1][1] = 4
+   * console.log(m.row(0))
    */
   row (rowIndex) {
     return new Vector(this[rowIndex])
   }
 
   /**
-   * 矩陣相減，傳回新矩陣。
-   * @param other
-   * @return {Matrix}
+   * 矩陣相減
+   * @param {Matrix} other
+   * @return {Matrix} 矩陣本身。
+   * @example
+   * let m1 = new Matrix(2, 2)
+   * m1[0][0] = 1
+   * m1[0][1] = 2
+   * m1[1][0] = 3
+   * m1[1][1] = 4
+   * let m2 = new Matrix(2, 2)
+   * m2[0][0] = 1
+   * m2[0][1] = 2
+   * m2[1][0] = 3
+   * m2[1][1] = 4
+   * let m3 = m1.subtract(m2)
    */
   subtract (other) {
     let result = new Matrix(this.#rows, this.#columns)
@@ -310,12 +340,19 @@ class Matrix extends Array {
   /**
    * 所有元素的加總。
    * @return {number}
+   * @example
+   * let m1 = new Matrix(2, 2)
+   * m1[0][0] = 1
+   * m1[0][1] = 2
+   * m1[1][0] = 3
+   * m1[1][1] = 4
+   * console.log(m1.sum())
    */
   sum () {
     let result = 0
     for (let row = 0; row < this.#rows; row++) {
       for (let column = 0; column < this.#columns; column++) {
-        result += (this[row][column] || 0)
+        result += this[row][column]
       }
     }
     return result
