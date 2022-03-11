@@ -12,6 +12,8 @@ dolphin-node-core 是一個 npm 套件，包含了一些常用的 JavaScript 物
 
 ## 文件
 
+![diagram](md/diagram.png)![]()
+
 [詳細的 JSDoc 說明](https://leoshiang.github.io/dolphin-node-core/)。
 
 簡要的說明：
