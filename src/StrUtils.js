@@ -6,17 +6,15 @@
  * @param {string} sentence 句子。
  * @return {boolean}
  */
-const coOccurrences = (sentence, words) => {
-  let count = 0
-  words.forEach(x => {
-    let regex = new RegExp(`(^|\\W)${x}($|\\W)`)
-    if (sentence.match(regex)) {
-      count++
+const includes = (sentence, words) => {
+  for (let word = 0; word < words.length; word++) {
+    if (sentence.indexOf(words[word]) === -1) {
+      return false
     }
-  })
-  return count >= words.length
+  }
+  return true
 }
 
 module.exports = {
-  coOccurrences,
+  includes,
 }
