@@ -1,9 +1,9 @@
-/** @module Exceptions **/
+/** @module 例外 **/
 
 /**
  * @class
  */
-class KeyNotExistsException extends Error {
+class 索引超出範圍例外 extends Error {
   constructor (message) {
     super(message)
     this.name = this.constructor.name
@@ -14,7 +14,7 @@ class KeyNotExistsException extends Error {
 /**
  * @class
  */
-class IndexOutOfRangeException extends Error {
+class 參數錯誤 extends Error {
   constructor (message) {
     super(message)
     this.name = this.constructor.name
@@ -25,7 +25,7 @@ class IndexOutOfRangeException extends Error {
 /**
  * @class
  */
-class InvalidParameterException extends Error {
+class 型別錯誤 extends Error {
   constructor (message) {
     super(message)
     this.name = this.constructor.name
@@ -34,7 +34,7 @@ class InvalidParameterException extends Error {
 }
 
 module.exports = {
-  KeyNotExistsException,
-  IndexOutOfRangeException,
-  InvalidParameterException,
+  索引超出範圍例外,
+  型別錯誤,
+  參數錯誤,
 }
