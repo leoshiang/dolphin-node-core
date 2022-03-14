@@ -1,250 +1,152 @@
-const type = require('../src/Type')
+const 型別 = require('../src/Type')
 
-describe('測試 getType',
-         () => {
-           test('應能正確取得陣列的型別',
-                () => expect(type.getType([])).toBe(type.Types.Array))
+describe('測試【取得型別】', () => {
+  test('應能正確取得陣列的型別', () => expect(型別.取得型別([])).toBe(型別.型別常數.Array))
 
-           test('應能正確取得物件的型別',
-                () => expect(type.getType({})).toBe(type.Types.Object))
+  test('應能正確取得物件的型別', () => expect(型別.取得型別({})).toBe(型別.型別常數.Object))
 
-           test('應能正確取得字串的型別',
-                () => expect(type.getType('sss')).toBe(type.Types.String))
+  test('應能正確取得字串的型別', () => expect(型別.取得型別('sss')).toBe(型別.型別常數.String))
 
-           test('應能正確取得日期的型別',
-                () => expect(type.getType(new Date())).toBe(type.Types.Date))
+  test('應能正確取得日期的型別', () => expect(型別.取得型別(new Date())).toBe(型別.型別常數.Date))
 
-           test('應能正確取得 RegExp 的型別',
-                () => expect(type.getType(/^.*/)).toBe(type.Types.RegExp))
+  test('應能正確取得 RegExp 的型別', () => expect(型別.取得型別(/^.*/)).toBe(型別.型別常數.RegExp))
 
-           test('應能正確取得函數的型別',
-                () => expect(type.getType(function () {})).toBe(type.Types.Function))
+  test('應能正確取得函數的型別',
+       () => expect(型別.取得型別(function () {})).toBe(型別.型別常數.Function))
 
-           test('應能正確取得 Boolean 的型別',
-                () => expect(type.getType(1 === 1)).toBe(type.Types.Boolean))
+  test('應能正確取得 Boolean 的型別',
+       () => expect(型別.取得型別(1 === 1)).toBe(型別.型別常數.Boolean))
 
-           test('應能正確取得數字的型別',
-                () => expect(type.getType(1)).toBe(type.Types.Number))
+  test('應能正確取得數字的型別', () => expect(型別.取得型別(1)).toBe(型別.型別常數.Number))
 
-           test('應能正確取得 Null 的型別',
-                () => expect(type.getType(null)).toBe(type.Types.Null))
+  test('應能正確取得 Null 的型別', () => expect(型別.取得型別(null)).toBe(型別.型別常數.Null))
 
-           test('應能正確取得 Undefined 的型別',
-                () => expect(type.getType(undefined)).toBe(type.Types.Undefined))
-         })
+  test('應能正確取得 Undefined 的型別',
+       () => expect(型別.取得型別(undefined)).toBe(型別.型別常數.Undefined))
+})
 
-describe('測試 isArray',
-         () => {
-           test('不是傳入陣列應該回傳 false',
-                () => expect(type.isArray(1)).toBe(false))
+describe('測試【是陣列】', () => {
+  test('不是傳入陣列應該回傳 false', () => expect(型別.是陣列(1)).toBe(false))
 
-           test('傳入陣列應該回傳 true',
-                () => expect(type.isArray([])).toBe(true))
-         })
+  test('傳入陣列應該回傳 true', () => expect(型別.是陣列([])).toBe(true))
+})
 
-describe('測試 isObject',
-         () => {
-           test('不是傳入物件應該回傳 false',
-                () => expect(type.isObject(1)).toBe(false))
+describe('測試【是物件】', () => {
+  test('不是傳入物件應該回傳 false', () => expect(型別.是物件(1)).toBe(false))
 
-           test('傳入物件應該回傳 true',
-                () => expect(type.isObject({})).toBe(true))
-         })
+  test('傳入物件應該回傳 true', () => expect(型別.是物件({})).toBe(true))
+})
 
-describe('測試 isString',
-         () => {
-           test('不是傳入字串應該回傳 false',
-                () => expect(type.isString(1)).toBe(false))
+describe('測試【是字串】', () => {
+  test('不是傳入字串應該回傳 false', () => expect(型別.是字串(1)).toBe(false))
 
-           test('傳入字串應該回傳 true',
-                () => expect(type.isString('')).toBe(true))
-         })
+  test('傳入字串應該回傳 true', () => expect(型別.是字串('')).toBe(true))
+})
 
-describe('測試 isDate',
-         () => {
-           test('不是傳入日期應該回傳 false',
-                () => expect(type.isDate(1)).toBe(false))
+describe('測試【是日期】', () => {
+  test('不是傳入日期應該回傳 false', () => expect(型別.是日期(1)).toBe(false))
 
-           test('傳入日期應該回傳 true',
-                () => expect(type.isDate(new Date())).toBe(true))
-         })
+  test('傳入日期應該回傳 true', () => expect(型別.是日期(new Date())).toBe(true))
+})
 
-describe('測試 isRegExp',
-         () => {
-           test('不是傳入 RegExp 應該回傳 false',
-                () => expect(type.isRegExp(1)).toBe(false))
+describe('測試【是正規表示式】', () => {
+  test('不是傳入 RegExp 應該回傳 false', () => expect(型別.是正規表示式(1)).toBe(false))
 
-           test('傳入 RegExp 應該回傳 true',
-                () => expect(type.isRegExp(/^.*/)).toBe(true))
-         })
+  test('傳入 RegExp 應該回傳 true', () => expect(型別.是正規表示式(/^.*/)).toBe(true))
+})
 
-describe('測試 isFunction',
-         () => {
-           test('不是傳入函數應該回傳 false',
-                () => expect(type.isFunction(1)).toBe(false))
+describe('測試【是函數】', () => {
+  test('不是傳入函數應該回傳 false', () => expect(型別.是函數(1)).toBe(false))
 
-           test('傳入函數應該回傳 true',
-                () => expect(type.isFunction(function () {})).toBe(true))
-         })
+  test('傳入函數應該回傳 true', () => expect(型別.是函數(function () {})).toBe(true))
+})
 
-describe('測試 isBoolean',
-         () => {
-           test('不是傳入函數應該回傳 false',
-                () => expect(type.isBoolean(1)).toBe(false))
+describe('測試【是布林值】', () => {
+  test('不是傳入函數應該回傳 false', () => expect(型別.是布林值(1)).toBe(false))
 
-           test('傳入函數應該回傳 true',
-                () => expect(type.isBoolean(true)).toBe(true))
-         })
+  test('傳入函數應該回傳 true', () => expect(型別.是布林值(true)).toBe(true))
+})
 
-describe('測試 isNumber',
-         () => {
-           test('不是傳入數字應該回傳 false',
-                () => expect(type.isNumber('')).toBe(false))
+describe('測試【是數值】', () => {
+  test('不是傳入數字應該回傳 false', () => expect(型別.是數值('')).toBe(false))
 
-           test('傳入數字應該回傳 true',
-                () => expect(type.isNumber(1)).toBe(true))
-         })
+  test('傳入數字應該回傳 true', () => expect(型別.是數值(1)).toBe(true))
+})
 
-describe('測試 isNull',
-         () => {
-           test('不是傳入 null 應該回傳 false',
-                () => expect(type.isNull(1)).toBe(false))
+describe('測試【是空值】', () => {
+  test('不是傳入 null 應該回傳 false', () => expect(型別.是空值(1)).toBe(false))
 
-           test('傳入 null 應該回傳 true',
-                () => expect(type.isNull(null)).toBe(true))
-         })
+  test('傳入 null 應該回傳 true', () => expect(型別.是空值(null)).toBe(true))
+})
 
-describe('測試 isUndefined',
-         () => {
-           test('不是傳入 undefined 應該回傳 false',
-                () => expect(type.isUndefined(1)).toBe(false))
-         })
+describe('測試【未定義】', () => {
+  test('不是傳入 undefined 應該回傳 false', () => expect(型別.未定義(1)).toBe(false))
+})
 
-describe('測試 isNotArray',
-         () => {
-           test('不是傳入陣列應該回傳 true',
-                () => expect(type.isNotArray(1)).toBe(true))
+describe('測試【不是陣列】', () => {
+  test('不是傳入陣列應該回傳 true', () => expect(型別.不是陣列(1)).toBe(true))
 
-           test('傳入陣列應該回傳 false',
-                () => expect(type.isNotArray([])).toBe(false))
-         })
+  test('傳入陣列應該回傳 false', () => expect(型別.不是陣列([])).toBe(false))
+})
 
-describe('測試 isNotObject',
-         () => {
-           test('不是傳入物件應該回傳 true',
-                () => expect(type.isNotObject(1)).toBe(true))
+describe('測試【不是物件】', () => {
+  test('不是傳入物件應該回傳 true', () => expect(型別.不是物件(1)).toBe(true))
 
-           test('傳入物件應該回傳 false',
-                () => expect(type.isNotObject({})).toBe(false))
-         })
+  test('傳入物件應該回傳 false', () => expect(型別.不是物件({})).toBe(false))
+})
 
-describe('測試 isNotObject',
-         () => {
-           test('不是傳入字串應該回傳 true',
-                () => expect(type.isNotString(1)).toBe(true))
+describe('測試【不是字串】', () => {
+  test('不是傳入字串應該回傳 true', () => expect(型別.不是字串(1)).toBe(true))
 
-           test('傳入字串應該回傳 false',
-                () => expect(type.isNotString('')).toBe(false))
-         })
+  test('傳入字串應該回傳 false', () => expect(型別.不是字串('')).toBe(false))
+})
 
-describe('測試 isNotObject',
-         () => {
-           test('不是傳入日期應該回傳 true',
-                () => expect(type.isNotDate(1)).toBe(true))
+describe('測試【不是日期】', () => {
+  test('不是傳入日期應該回傳 true', () => expect(型別.不是日期(1)).toBe(true))
 
-           test('傳入日期應該回傳 false',
-                () => expect(type.isNotDate(new Date())).toBe(false))
-         })
+  test('傳入日期應該回傳 false', () => expect(型別.不是日期(new Date())).toBe(false))
+})
 
-describe('測試 isNotRegExp',
-         () => {
-           test('不是傳入 RegExp 應該回傳 true',
-                () => expect(type.isNotRegExp(1)).toBe(true))
+describe('測試【不是正規表示式】', () => {
+  test('不是傳入 RegExp 應該回傳 true', () => expect(型別.不是正規表示式(1)).toBe(true))
 
-           test('傳入 RegExp 應該回傳 false',
-                () => expect(type.isNotRegExp(/^.*/)).toBe(false))
-         })
+  test('傳入 RegExp 應該回傳 false', () => expect(型別.不是正規表示式(/^.*/)).toBe(false))
+})
 
-describe('測試 isNotFunction',
-         () => {
-           test('不是傳入函數應該回傳 true',
-                () => expect(type.isNotFunction(1)).toBe(true))
+describe('測試【不是函數】', () => {
+  test('不是傳入函數應該回傳 true', () => expect(型別.不是函數(1)).toBe(true))
 
-           test('傳入函數應該回傳 false',
-                () => expect(type.isNotFunction(function () {})).toBe(false))
-         })
+  test('傳入函數應該回傳 false', () => expect(型別.不是函數(function () {})).toBe(false))
+})
 
-describe('測試 isNotBoolean',
-         () => {
-           test('不是傳入函數應該回傳 true',
-                () => expect(type.isNotBoolean(1)).toBe(true))
+describe('測試【不是布林值】', () => {
+  test('不是傳入函數應該回傳 true', () => expect(型別.不是布林值(1)).toBe(true))
 
-           test('傳入函數應該回傳 false',
-                () => expect(type.isNotBoolean(false)).toBe(false))
-         })
+  test('傳入函數應該回傳 false', () => expect(型別.不是布林值(false)).toBe(false))
+})
 
-describe('測試 isNotNumber',
-         () => {
-           test('不是傳入數字應該回傳 true',
-                () => expect(type.isNotNumber('')).toBe(true))
+describe('測試【不是數值】', () => {
+  test('不是傳入數字應該回傳 true', () => expect(型別.不是數值('')).toBe(true))
 
-           test('傳入數字應該回傳 false',
-                () => expect(type.isNotNumber(1)).toBe(false))
-         })
+  test('傳入數字應該回傳 false', () => expect(型別.不是數值(1)).toBe(false))
+})
 
-describe('測試 isNotNull',
-         () => {
-           test('不是傳入 null 應該回傳 true',
-                () => expect(type.isNotNull(1)).toBe(true))
+describe('測試【不是空值】', () => {
+  test('不是傳入 null 應該回傳 true', () => expect(型別.不是空值(1)).toBe(true))
 
-           test('傳入 null 應該回傳 false',
-                () => expect(type.isNotNull(null)).toBe(false))
-         })
+  test('傳入 null 應該回傳 false', () => expect(型別.不是空值(null)).toBe(false))
+})
 
-describe('測試 isNotUndefined',
-         () => {
-           test('不是傳入 undefined 應該回傳 true',
-                () => expect(type.isNotUndefined(1)).toBe(true))
-         })
+describe('測試【型別相同】', () => {
+  test('傳入兩個物件應該回傳 true', () => expect(型別.型別相同({}, {})).toBe(true))
 
-describe('測試 isZero',
-         () => {
-           test('傳入非數值應該回傳 false',
-                () => expect(type.isZero({})).toBe(false))
+  test('傳入兩個整數應該回傳 true', () => expect(型別.型別相同(1, 2)).toBe(true))
 
-           test('傳入非數值應該回傳 false',
-                () => expect(type.isZero('0')).toBe(false))
+  test('傳入兩個浮點數應該回傳 true', () => expect(型別.型別相同(1.1, 1.2)).toBe(true))
 
-           test('傳入非零數值應該回傳 false',
-                () => expect(type.isZero(2)).toBe(false))
+  test('傳入整數和浮點數應該回傳 true', () => expect(型別.型別相同(1, 1.2)).toBe(true))
 
-           test('傳入數值零應該回傳 true',
-                () => expect(type.isZero(0)).toBe(true))
-         })
+  test('傳入兩個字串應該回傳 true', () => expect(型別.型別相同('a', 'b')).toBe(true))
 
-describe('測試 sameType',
-         () => {
-           test('傳入兩個物件應該回傳 true',
-                () => expect(type.sameType({},
-                                           {})).toBe(true))
-
-           test('傳入兩個整數應該回傳 true',
-                () => expect(type.sameType(1,
-                                           2)).toBe(true))
-
-           test('傳入兩個浮點數應該回傳 true',
-                () => expect(type.sameType(1.1,
-                                           1.2)).toBe(true))
-
-           test('傳入整數和浮點數應該回傳 true',
-                () => expect(type.sameType(1,
-                                           1.2)).toBe(true))
-
-           test('傳入兩個字串應該回傳 true',
-                () => expect(type.sameType('a',
-                                           'b')).toBe(true))
-
-           test('傳入兩個陣列應該回傳 true',
-                () => expect(type.sameType([1,2],
-                                           [3,4])).toBe(true))
-         })
+  test('傳入兩個陣列應該回傳 true', () => expect(型別.型別相同([1, 2], [3, 4])).toBe(true))
+})

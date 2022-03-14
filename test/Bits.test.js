@@ -1,121 +1,249 @@
 const { Bits } = require('../src/Bits')
-const { IndexOutOfRangeException } = require('../src/Exceptions')
+const {
+  TypeError,
+  InvalidParameterError,
+  IndexOutOfRangeError,
+} = require('../src/Exceptions')
 
 describe('測試 constructor', function () {
-  test('未指定長度，length 應該等於 0', () => {
+  test('未指定長度，位元數應為 0', () => {
     let bits = new Bits()
-    expect(bits.length).toBe(0)
+    expect(bits.位元數).toBe(0)
   })
 
-  test('傳入非數值的長度，length 應該等於 0', () => {
-    let bits = new Bits('a')
-    expect(bits.length).toBe(0)
+  test('位元數小於零，應拋出TypeError', () => {
+    expect(() => new Bits(-1)).toThrow(TypeError)
   })
 
-  test('傳入 33，長度應該等於 33', () => {
-    let bits = new Bits(33)
-    expect(bits.length).toBe(33)
+  test('位元數0，應配置0頁', () => {
+    let bits = new Bits(0)
+    expect(bits.分頁數目).toBe(0)
+    expect(bits.位元數).toBe(0)
+  })
+
+  test('位元數24，應配置1頁', () => {
+    let bits = new Bits(24)
+    expect(bits.分頁數目).toBe(1)
+    expect(bits.位元數).toBe(24)
+  })
+
+  test('位元數25，應配置2頁', () => {
+    let bits = new Bits(25)
+    expect(bits.分頁數目).toBe(2)
+    expect(bits.位元數).toBe(25)
+  })
+
+  test('二進位字串 01010101，應能解析為 01010101', () => {
+    let bits = new Bits('01010101')
+    expect(bits.取得二進位字串()).toBe('01010101')
+  })
+
+  test('1010101010101010101010101，應能解析為1010101010101010101010101', () => {
+    const bits = new Bits('1010101010101010101010101')
+    expect(bits.取得二進位字串()).toBe('1010101010101010101010101')
   })
 })
 
-describe('測試 forEach', function () {
-  test('如果 callback 不是函數，應不做動作，回傳本身', () => {
-    let bits = new Bits(4)
-    bits.on(0)
-    bits.on(2)
-    expect(bits.forEach()).toBe(bits)
+describe('測試【取得狀態】', function () {
+  test('位元編號不是數值，應拋出TypeError例外', () => {
+    const bits = new Bits(24)
+    expect(() => bits.取得狀態()).toThrow(TypeError)
   })
 
-  test('設定 [1,0,1,0]，應該依次取得 [1,0,1,1]', () => {
-    let bits = new Bits(4)
-    bits.on(0)
-    bits.on(2)
-
-    let result = []
-    bits.forEach((x) => result.push(x))
-
-    expect(result).toStrictEqual([true, false, true, false])
+  test('位元數 24，取得位元編號 -1 的狀態，應拋出IndexOutOfRangeError', () => {
+    const bits = new Bits(24)
+    expect(() => bits.取得狀態(-1)).toThrow(IndexOutOfRangeError)
   })
 
-  test('執行完，應回傳本身', () => {
-    let bits = new Bits(4)
-    bits.on(0)
-    bits.on(2)
-    expect(bits.forEach(() => {})).toBe(bits)
-  })
-})
-
-describe('測試 setLength', function () {
-  test('指定長度 33，長度應該等於 33', () => {
-    let bits = new Bits()
-    bits.length = 33
-    expect(bits.length).toBe(33)
+  test('位元數 24，取得位元編號 24 的狀態，應拋出IndexOutOfRangeError', () => {
+    const bits = new Bits(24)
+    expect(() => bits.取得狀態(24)).toThrow(IndexOutOfRangeError)
   })
 
-  test('指定非數值的長度，長度應該不變', () => {
-    let bits = new Bits()
-    bits.length = 33
-    bits.length = 'a'
-    expect(bits.length).toBe(33)
+  test('位元數 24，取得位元編號 25 的狀態，應拋出IndexOutOfRangeError', () => {
+    const bits = new Bits(24)
+    expect(() => bits.取得狀態(25)).toThrow(IndexOutOfRangeError)
   })
 
-  test('指定長度 65 之後指定長度 33，長度應等於 33', () => {
-    let bits = new Bits()
-    bits.length = 65
-    bits.length = 33
-    expect(bits.length).toBe(33)
+  test('位元數 24，取得位元編號 1 的狀態，應取得false', () => {
+    const bits = new Bits(24)
+    expect(bits.取得狀態(1)).toBe(false)
   })
 })
 
-describe('測試 fromInt32', function () {
-  test('指定 0xaaaaaaaa ，長度應該等於 32', () => {
-    let bits = new Bits()
-    bits.fromInt32(0xaaaaaaaa)
-    expect(bits.length).toBe(32)
+describe('測試【設定狀態】', function () {
+  test('位元編號不是數值，應拋出TypeError例外', () => {
+    const bits = new Bits(24)
+    expect(() => bits.設定狀態()).toThrow(TypeError)
   })
 
-  test('指定 0xaaaaaaaa ，奇數位元應等於 1', () => {
-    let bits = new Bits()
-    bits.fromInt32(0xaaaaaaaa)
-    bits.forEach(function (value, index) {
-      expect(value | 0).toBe(index % 2)
+  test('位元數 24，設定位元編號 -1 的狀態，應拋出IndexOutOfRangeError', () => {
+    const bits = new Bits(24)
+    expect(() => bits.設定狀態(-1)).toThrow(IndexOutOfRangeError)
+  })
+
+  test('位元數 24，設定位元編號 24 的狀態，應拋出IndexOutOfRangeError', () => {
+    const bits = new Bits(24)
+    expect(() => bits.設定狀態(24)).toThrow(IndexOutOfRangeError)
+  })
+
+  test('位元數 24，設定位元編號 25 的狀態，應拋出IndexOutOfRangeError', () => {
+    const bits = new Bits(24)
+    expect(() => bits.設定狀態(25)).toThrow(IndexOutOfRangeError)
+  })
+
+  test('位元數 24，設定位元編號 1 的狀態，應回傳本身', () => {
+    const bits = new Bits(24)
+    expect(bits.設定狀態(1, true)).toBe(bits)
+  })
+
+  test('9個位元，狀態從true改為false，應等於 000000000', () => {
+    const bits = new Bits(9)
+    bits.設定狀態(1, true)
+    bits.設定狀態(3, true)
+    bits.設定狀態(5, true)
+    bits.設定狀態(7, true)
+    bits.設定狀態(1, false)
+    bits.設定狀態(3, false)
+    bits.設定狀態(5, false)
+    bits.設定狀態(7, false)
+    expect(bits.取得二進位字串()).toBe('000000000')
+  })
+  test('9個位元，位元1-8設為true，應等於 111111110', () => {
+    const bits = new Bits(9)
+    bits.設定狀態(1, true)
+    bits.設定狀態(2, true)
+    bits.設定狀態(3, true)
+    bits.設定狀態(4, true)
+    bits.設定狀態(5, true)
+    bits.設定狀態(6, true)
+    bits.設定狀態(7, true)
+    bits.設定狀態(8, true)
+    expect(bits.取得二進位字串()).toBe('111111110')
+  })
+})
+
+describe('測試【設定二進位字串】', function () {
+  test('10101010，應能解析為10101010', () => {
+    const bits = new Bits(0).設定二進位字串('10101010')
+    expect(bits.取得二進位字串()).toBe('10101010')
+  })
+
+  test('1010101010101010101010101，應能解析為1010101010101010101010101', () => {
+    const bits = new Bits(0).設定二進位字串('1010101010101010101010101')
+    expect(bits.取得二進位字串()).toBe('1010101010101010101010101')
+  })
+})
+
+describe('測試【and】', function () {
+  test('如果傳入的陣列長度不一樣，應拋出InvalidParameterError', () => {
+    const b1 = new Bits('10101010')
+    const b2 = new Bits('010101011')
+    expect(() => b1.and(b2)).toThrow(InvalidParameterError)
+  })
+
+  test('10101010 與 01010101 做 and 運算，結果應為 00000000', () => {
+    const b1 = new Bits('10101010')
+    const b2 = new Bits('01010101')
+    expect(b1.and(b2).取得二進位字串()).toBe('00000000')
+  })
+
+  test('11110000 與 11110000 做 and 運算，結果應為 11110000', () => {
+    const b1 = new Bits('11110000')
+    const b2 = new Bits('11110000')
+    expect(b1.and(b2).取得二進位字串()).toBe('11110000')
+  })
+
+  test(
+    '1111000011110000111100001 與 0000111100001111000011111 做 and 運算，結果應為 0000000000000000000000001',
+    () => {
+      const b1 = new Bits('1111000011110000111100001')
+      const b2 = new Bits('0000111100001111000011111')
+      expect(b1.and(b2).取得二進位字串()).toBe('0000000000000000000000001')
     })
+})
+
+describe('測試【or】', function () {
+  test('如果傳入的陣列長度不一樣，應拋出InvalidParameterError', () => {
+    const b1 = new Bits('10101010')
+    const b2 = new Bits('010101011')
+    expect(() => b1.or(b2)).toThrow(InvalidParameterError)
+  })
+
+  test('10101010 與 01010101 做 or 運算，結果應為 11111111', () => {
+    const b1 = new Bits('10101010')
+    const b2 = new Bits('01010101')
+    expect(b1.or(b2).取得二進位字串()).toBe('11111111')
+  })
+
+  test('11110000 與 11110000 做 and 運算，結果應為 11110000', () => {
+    const b1 = new Bits('11110000')
+    const b2 = new Bits('11110000')
+    expect(b1.or(b2).取得二進位字串()).toBe('11110000')
+  })
+
+  test(
+    '1111000011110000111100001 與 0000111100001111000011111 做 or 運算，結果應為 1111111111111111111111111',
+    () => {
+      const b1 = new Bits('1111000011110000111100001')
+      const b2 = new Bits('0000111100001111000011111')
+      expect(b1.or(b2).取得二進位字串()).toBe('1111111111111111111111111')
+    })
+})
+
+describe('測試【not】', function () {
+  test('10101010 做 not 運算，應回傳 01010101', () => {
+    const bits = new Bits('10101010')
+    const newBits = bits.not()
+    expect(newBits.取得二進位字串()).toBe('01010101')
+  })
+
+  test('1111000011110000111100001 做 not 運算，結果應為 0000111100001111000011110',
+       () => {
+         const bits = new Bits('1111000011110000111100001')
+         const newBits = bits.not()
+         expect(newBits.取得二進位字串()).toBe('0000111100001111000011110')
+       })
+})
+
+describe('測試【xor】', function () {
+  test('如果傳入的陣列長度不一樣，應拋出InvalidParameterError', () => {
+    const b1 = new Bits('10101010')
+    const b2 = new Bits('010101011')
+    expect(() => b1.xor(b2)).toThrow(InvalidParameterError)
+  })
+
+  test('101 與 011 做 xor 運算，結果應為 110', () => {
+    const b1 = new Bits('101')
+    const b2 = new Bits('011')
+    expect(b1.xor(b2).取得二進位字串()).toBe('110')
+  })
+
+  test(
+    '1111000011110000111100001 與 0000111100001111000011111 做 xor 運算，結果應為 1111111111111111111111111',
+    () => {
+      const b1 = new Bits('1111000011110000111100001')
+      const b2 = new Bits('0000111100001111000011111')
+      expect(b1.xor(b2).取得二進位字串()).toBe('1111111111111111111111110')
+    })
+})
+
+describe('測試【設定所有位元的狀態】', function () {
+  test('位元數 25，設定所有位元的狀態 true，結果應為 1111111111111111111111111', () => {
+    const bits = new Bits(25).設定所有位元的狀態(true)
+    expect(bits.取得二進位字串()).toBe('1111111111111111111111111')
+  })
+
+  test('位元數 25，設定所有位元的狀態 false，結果應為 0000000000000000000000000', () => {
+    const bits = new Bits(25).設定所有位元的狀態(false)
+    expect(bits.取得二進位字串()).toBe('0000000000000000000000000')
   })
 })
 
-describe('測試 set', function () {
-  test('set 指定長度 128 偶數位元設為 1，偶數位元應等於 1', () => {
-    let bits = new Bits(128)
-    for (let i = 0; i <= 127; i++) {
-      bits.set(i, i % 2 !== 0)
-    }
-
-    for (let j = 0; j <= 127; j++) {
-      expect(bits.isOn(j) | 0).toBe(j % 2)
-    }
-  })
-})
-
-describe('測試 索引', function () {
-  test('索引超出範圍，應拋出例外', () => {
-    let bits = new Bits(128)
-    expect(() => bits.on(200)).toThrow(IndexOutOfRangeException)
-  })
-})
-
-
-describe('測試 toInt32', function () {
-  test('0應回傳0', () => {
-    let bits = new Bits()
-    expect(bits.toInt32()).toBe(0)
-  })
-
-  test('11110000應回傳240', () => {
-    let bits = new Bits(8)
-    bits.on(4)
-    bits.on(5)
-    bits.on(6)
-    bits.on(7)
-    expect(bits.toInt32()).toBe(240)
+describe('測試【複製】', function () {
+  test('1111000011110000111100001，複製結果應為 1111000011110000111100001', () => {
+    const bits = new Bits('1111000011110000111100001')
+    const newBits = bits.複製()
+    expect(newBits.取得二進位字串()).toBe('1111000011110000111100001')
   })
 })

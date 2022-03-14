@@ -1,6 +1,6 @@
 /** @module Type **/
 
-const Types = {
+const 型別常數 = {
   Array: 'Array',
   Boolean: 'Boolean',
   Date: 'Date',
@@ -13,54 +13,55 @@ const Types = {
   Undefined: 'Undefined',
 }
 
-const getType = (obj) => Object.prototype.toString.call(obj)
-                               .slice(8, -1)
-const isArray = (obj) => getType(obj) === Types.Array
-const isBoolean = (obj) => getType(obj) === Types.Boolean
-const isDate = (obj) => getType(obj) === Types.Date
-const isFunction = (obj) => getType(obj) === Types.Function
-const isNull = (obj) => getType(obj) === Types.Null
-const isNumber = (obj) => getType(obj) === Types.Number
-const isObject = (obj) => getType(obj) === Types.Object
-const isRegExp = (obj) => getType(obj) === Types.RegExp
-const isString = (obj) => getType(obj) === Types.String
-const isUndefined = (obj) => getType(obj) === Types.Undefined
-const isNotArray = (obj) => getType(obj) !== Types.Array
-const isNotBoolean = (obj) => getType(obj) !== Types.Boolean
-const isNotDate = (obj) => getType(obj) !== Types.Date
-const isNotFunction = (obj) => getType(obj) !== Types.Function
-const isNotNull = (obj) => getType(obj) !== Types.Null
-const isNotNumber = (obj) => getType(obj) !== Types.Number
-const isNotObject = (obj) => getType(obj) !== Types.Object
-const isNotRegExp = (obj) => getType(obj) !== Types.RegExp
-const isNotString = (obj) => getType(obj) !== Types.String
-const isNotUndefined = (obj) => getType(obj) !== Types.Undefined
-const isZero = (obj) => obj === 0
-const sameType = (obj, other) => getType(obj) === getType(other)
+const 取得型別 = (obj) => Object.prototype.toString.call(obj).slice(8, -1)
+const 是陣列 = (obj) => 取得型別(obj) === 型別常數.Array
+const 是布林值 = (obj) => 取得型別(obj) === 型別常數.Boolean
+const 是日期 = (obj) => 取得型別(obj) === 型別常數.Date
+const 是函數 = (obj) => 取得型別(obj) === 型別常數.Function
+const 是空值 = (obj) => 取得型別(obj) === 型別常數.Null
+const 是數值 = (obj) => 取得型別(obj) === 型別常數.Number
+const 是物件 = (obj) => 取得型別(obj) === 型別常數.Object
+const 是正規表示式 = (obj) => 取得型別(obj) === 型別常數.RegExp
+const 是字串 = (obj) => 取得型別(obj) === 型別常數.String
+const 未定義 = (obj) => 取得型別(obj) === 型別常數.Undefined
+const 不是陣列 = (obj) => 取得型別(obj) !== 型別常數.Array
+const 不是布林值 = (obj) => 取得型別(obj) !== 型別常數.Boolean
+const 不是日期 = (obj) => 取得型別(obj) !== 型別常數.Date
+const 不是函數 = (obj) => 取得型別(obj) !== 型別常數.Function
+const 不是空值 = (obj) => 取得型別(obj) !== 型別常數.Null
+const 不是數值 = (obj) => 取得型別(obj) !== 型別常數.Number
+const 不是物件 = (obj) => 取得型別(obj) !== 型別常數.Object
+const 不是正規表示式 = (obj) => 取得型別(obj) !== 型別常數.RegExp
+const 不是字串 = (obj) => 取得型別(obj) !== 型別常數.String
+const 型別相同 = (obj, other) => 取得型別(obj) === 取得型別(other)
+
+const 極小值 = 1.0E-150
+const 容許值 = 1.0E-8
+
+const 數值相等 = (a, b) => Math.abs(a - b) <= 容許值
 
 module.exports = {
-  Types,
-  getType,
-  isArray,
-  isBoolean,
-  isDate,
-  isFunction,
-  isNull,
-  isNumber,
-  isObject,
-  isRegExp,
-  isString,
-  isUndefined,
-  isNotArray,
-  isNotBoolean,
-  isNotDate,
-  isNotFunction,
-  isNotNull,
-  isNotNumber,
-  isNotObject,
-  isNotRegExp,
-  isNotString,
-  isNotUndefined,
-  isZero,
-  sameType,
+  型別常數,
+  取得型別,
+  是陣列,
+  是布林值,
+  是日期,
+  是函數,
+  是空值,
+  是數值,
+  是物件,
+  是正規表示式,
+  是字串,
+  未定義,
+  不是陣列,
+  不是布林值,
+  不是日期,
+  不是函數,
+  不是空值,
+  不是數值,
+  不是物件,
+  不是正規表示式,
+  不是字串,
+  型別相同,
+  數值相等,
 }

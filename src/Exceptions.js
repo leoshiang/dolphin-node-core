@@ -1,9 +1,9 @@
-/** @module 例外 **/
+/** @module Exceptions **/
 
 /**
  * @class
  */
-class 索引超出範圍例外 extends Error {
+class IndexOutOfRangeError extends Error {
   constructor (message) {
     super(message)
     this.name = this.constructor.name
@@ -14,7 +14,7 @@ class 索引超出範圍例外 extends Error {
 /**
  * @class
  */
-class 參數錯誤 extends Error {
+class InvalidParameterError extends Error {
   constructor (message) {
     super(message)
     this.name = this.constructor.name
@@ -25,7 +25,7 @@ class 參數錯誤 extends Error {
 /**
  * @class
  */
-class 型別錯誤 extends Error {
+class TypeError extends Error {
   constructor (message) {
     super(message)
     this.name = this.constructor.name
@@ -34,7 +34,7 @@ class 型別錯誤 extends Error {
 }
 
 module.exports = {
-  索引超出範圍例外,
-  型別錯誤,
-  參數錯誤,
+  IndexOutOfRangeError,
+  TypeError,
+  InvalidParameterError,
 }

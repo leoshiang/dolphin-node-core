@@ -1,14 +1,19 @@
 const Type = require('./Type')
+const {
+  TypeError,
+  InvalidParameterError,
+} = require('./Exceptions')
+const { Bits } = require('./Bits')
 
 /**
  * @class
- * @classdesc 向量。
+ * @classdesc Vector。
  */
 class Vector extends Array {
 
   /**
    * @constructor
-   * @param items
+   * @param {array|number}初始值
    * @example
    * const v1 = new Vector(4) // [undefined, undefined, undefined, undefined]
    * const v2 = new Vector([1, 2, 3]) // [1, 2, 3]
@@ -17,102 +22,312 @@ class Vector extends Array {
    * const v5 = new Vector() // []
    *
    */
-  constructor (...items) {
-    let allItems = items.reduce((a, b) => {
-      if (Type.isArray(b)) {
+  constructor (初始值) {
+    let 參數陣列 = Array.from(arguments)
+    if (參數陣列.length === 1 && Type.是數值(參數陣列[0])) {
+      super(參數陣列[0])
+      this.fill(0)
+      return
+    }
+    let 展開的初始值 = 參數陣列.reduce((a, b) => {
+      if (Type.是陣列(b)) {
         return [...a, ...b]
       } else {
         return [...a, b]
       }
     }, [])
-    super(...allItems)
+    super(...展開的初始值)
+  }
+
+  static #檢查排除的項目是否有效 (排除的項目) {
+    if (排除的項目 && !(排除的項目 instanceof Bits)) {
+      throw new TypeError('排除的項目必須是Bits。')
+    }
+  }
+
+  #找符合條件的元素 (排除的項目, 比較函數) {
+    Vector.#檢查排除的項目是否有效(排除的項目)
+    if (this.length === 0) {
+      return {
+        Index: -1,
+        Value: null,
+      }
+    }
+    let 結果 = {
+      Index: 0,
+      Value: this[0],
+    }
+    let 位置 = 1
+    while (位置 < this.length) {
+      if (排除的項目 && 排除的項目.取得狀態(位置)) {
+        位置++
+        continue
+      }
+      let 目前的元素 = this[位置]
+      if (比較函數(目前的元素, 結果.Value)) {
+        結果 = {
+          Index: 位置,
+          Value: 目前的元素,
+        }
+      }
+      位置++
+    }
+    return 結果
   }
 
   /**
-   * 向量相加。
-   * @param {Vector} other
-   * @return {Vector} 傳回新向量。
-   * @example
-   * const v1 = new Vector([1, 2, 3])
-   * const v2 = new Vector([4, 5, 6])
-   * const v3 = v1.add(v2) // [5, 7, 8]
-   */
-  add (other) {
-    return new Vector(this.map((x, index) => x + other[index]))
-  }
-
-  /**
-   * cross product
-   * @param {Vector} other
+   * 外積。
+   * @param {Vector} 對象
    * @return {Vector} 傳回新向量。
    * @example
    * const v1 = new Vector([3, 4, 1])
    * const v2 = new Vector([3, 7, 5])
-   * const v3 = v1.cross(v2) // [13, -12, 9]
+   * const v3 = v1.外積(v2) // [13, -12, 9]
    */
-  cross (other) {
-    return new Vector(this[1] * other[2] - this[2] * other[1],
-                      this[2] * other[0] - this[0] * other[2],
-                      this[0] * other[1] - this[1] * other[0])
+  外積 (對象) {
+    return new Vector(this[1] * 對象[2] - this[2] * 對象[1],
+                      this[2] * 對象[0] - this[0] * 對象[2],
+                      this[0] * 對象[1] - this[1] * 對象[0])
   }
 
   /**
-   * dot product
-   * @param {Vector} other
+   * 內積
+   * @param {Vector} 對象
    * @return {number}
    * @example
    * const v1 = new Vector([3, 4, 1])
    * const v2 = new Vector([3, 7, 5])
    * const product = v1.dot(v2) // 42
    */
-  dot (other) {
-    return other.reduce((acc, curr, index) => acc + curr * this[index], 0)
+  內積 (對象) {
+    return 對象.reduce((acc, curr, index) => acc + curr * this[index], 0)
+  }
+
+  #找第一個符合條件的元素 (數值, 排除的項目, 比較函數) {
+    Vector.#檢查排除的項目是否有效(排除的項目)
+    let 位置 = 0
+    while (位置 < this.length) {
+      if (排除的項目 && 排除的項目.取得狀態(位置)) {
+        位置++
+        continue
+      }
+      let 目前的元素 = this[位置]
+      if (比較函數(目前的元素, 數值)) {
+        return {
+          Index: 位置,
+          Value: 目前的元素,
+        }
+      }
+      位置++
+    }
+    return {
+      Index: -1,
+      Value: null,
+    }
   }
 
   /**
-   * 距離。
+   * 每一個元素乘上傳入的數值。
+   * @param {number} 數值
+   * @return {Vector} 向量本身。
+   * @throws {TypeError}
+   */
+  乘 (數值) {
+    if (Type.不是數值(數值)) {
+      throw new TypeError('傳入的參數應為數值。')
+    }
+    for (let i = 0; i < this.length; i++) {
+      this[i] *= 數值
+    }
+    return this
+  }
+
+  /**
+   * 每個元素會被回呼函數回傳值取代。如果元素的索引在排除的項目中設為 true，便會被排除。
+   * @param {Bits} 排除的項目
+   * @param 回呼函數
+   * @return {Vector} 向量本身
+   * @throws {TypeError} 如果排除的項目不是Bits會拋出此例外。
+   */
+  修改每個元素但是排除 (排除的項目, 回呼函數) {
+    if (!(排除的項目 instanceof Bits)) {
+      throw new TypeError('排除的項目必須是Bits。')
+    }
+    for (let i = 0; i < this.length; i++) {
+      if (排除的項目.取得狀態(i)) {
+        continue
+      }
+      this[i] = 回呼函數(this[i], i)
+    }
+    return this
+  }
+
+  /**
+   * 每一個元素加上傳入的對象(數值或向量)。
+   * @param {number|Vector} 對象
+   * @return {Vector} 新向量。
+   * @throws {InvalidParameterError}
+   */
+  加 (對象) {
+    if (對象 instanceof Vector) {
+      if (對象.length !== this.length) {
+        throw new InvalidParameterError('對象的長度必須與向量相同。')
+      }
+    } else if (Type.不是數值(對象)) {
+      throw new TypeError('對象必須是數值或向量。')
+    }
+
+    let 新向量 = new Vector(this.length)
+    if (Type.是數值(對象)) {
+      for (let i = 0; i < this.length; i++) {
+        新向量[i] = this[i] + 對象
+      }
+    } else {
+      for (let i = 0; i < this.length; i++) {
+        新向量[i] = this[i] + 對象[i]
+      }
+    }
+    return 新向量
+  }
+
+  /**
+   * 加入元素。
+   * @param {array|number} 元素 要加入的元素可以是單一數值或是陣列。
+   * @return {Vector} 新向量（包含加入的元素）。
+   */
+  加入 (元素) {
+    let 新向量 = this.複製()
+    let 參數陣列 = Array.from(arguments)
+    參數陣列.forEach(x => {
+      if (Type.是陣列(x)) {
+        x.forEach(y => 新向量.push(y))
+      } else {
+        新向量.push(x)
+      }
+    })
+    return 新向量
+  }
+
+  /**
+   * 尋找最大值。
+   * @return {{Value: number, Index: number}}
+   * @param {Bits} 排除的項目
+   */
+  最大值 (排除的項目) {
+    return this.#找符合條件的元素(排除的項目, (目前的元素, 結果) => 目前的元素 > 結果)
+  }
+
+  /**
+   * 尋找最小值。
+   * @return {{Value: number, Index: number}}
+   * @param {Bits} 排除的項目
+   */
+  最小值 (排除的項目) {
+    return this.#找符合條件的元素(排除的項目, (目前的元素, 結果) => 目前的元素 < 結果)
+  }
+
+  /**
+   * 在元素中尋找是否有相鄰的兩個數字。
+   * @param {number} a
+   * @param {number} b
+   * @return {boolean}
+   */
+  有相鄰的數字 (a, b) {
+    if (this.length <= 1) {
+      return false
+    }
+    const 第一個項目的位置 = this.indexOf(a)
+    return 第一個項目的位置 < this.length - 1 && Type.數值相等(this[第一個項目的位置 + 1], b)
+  }
+
+  /**
+   * 與對象是否相等。當兩個數值差異小於 0.00000001 時，會被認為是相等。
+   * @param {Vector} 對象
+   * @return {boolean}
+   * @throws {TypeError} 如果對象不是向量會拋出此例外。
+   */
+  相等於 (對象) {
+    if (!(對象 instanceof Vector)) {
+      throw new TypeError('對象必須是向量。')
+    }
+    if (對象.length !== this.length) {
+      return false
+    }
+    for (let i = 0; i < this.length; i++) {
+      if (!Type.數值相等(this[i], 對象[i])) {
+        return false
+      }
+    }
+    return true
+  }
+
+  /**
+   * 第一個大於數值的元素。
+   * @param {number} 數值
+   * @param {Bits} [排除的項目]
+   * @return {{Value: number, Index: number}|{Value: null, Index: number}}
+   * @throws {TypeError} 如果傳入的參數不是Bits會拋出此例外。
+   */
+  第一個大於 (數值, 排除的項目) {
+    return this.#找第一個符合條件的元素(數值, 排除的項目, (目前的元素, 數值) => 目前的元素 > 數值)
+  }
+
+  /**
+   * 第一個小於數值的元素。
+   * @param {number} 數值
+   * @param {Bits} [排除的項目]
+   * @return {{Value: number, Index: number}|{Value: null, Index: number}}
+   * @throws {TypeError} 如果傳入的參數不是Bits會拋出此例外。
+   */
+  第一個小於 (數值, 排除的項目) {
+    return this.#找第一個符合條件的元素(數值, 排除的項目, (目前的元素, 數值) => 目前的元素 < 數值)
+  }
+
+  /**
+   * 所有的項目加總。
+   * @param {Bits} 排除的項目
    * @return {number}
-   * @example
-   * const v = new Vector([1, 3]).norm()
-   * console.log(v) // 3.1622776601683795
+   * @throws {TypeError} 如果傳入的參數不是Bits會拋出此例外。
    */
-  norm () {
-    return Math.sqrt(this.reduce((acc, curr) => acc + curr * curr, 0))
+  總和 (排除的項目) {
+    Vector.#檢查排除的項目是否有效(排除的項目)
+    let 剩下的項目 = 排除的項目
+      ? this.filter((x, index) => !排除的項目.取得狀態(index))
+      : this
+    return 剩下的項目.reduce((acc, curr) => acc + curr, 0)
   }
 
   /**
-   * 與純量相乘。
-   * @param {number} number
-   * @return {Vector} 傳回新向量。
-   * @example
-   * const v = new Vector([1, 2, 3]).scaleBy(3) // [3, 6, 9]
+   * 複自己成為新向量。
+   * @return {Vector}
    */
-  scaleBy (number) {
-    return new Vector(this.map(x => x * number))
+  複製 () {
+    let 新向量 = new Vector(this.length)
+    for (let i = 0; i < this.length; i++) {
+      新向量[i] = this[i]
+    }
+    return 新向量
   }
 
   /**
-   * 向量相減。
-   * @param {Vector} other
-   * @return {Vector} 傳回新向量。
-   * @example
-   * const v1 = new Vector([1, 2, 3])
-   * const v2 = new Vector([4, 5, 6])
-   * const v3 = v1.subtract(v2)
+   * 遍歷每個元素，如果元素的索引在排除的項目中設為 true，便會被排除。
+   * @param {Bits} 排除的項目
+   * @param 回呼函數
+   * @return {Vector} 向量本身
+   * @throws {TypeError} 如果排除的項目不是Bits會拋出此例外。
    */
-  subtract (other) {
-    return new Vector(this.map((x, index) => x - other[index]))
-  }
+  遍歷每個元素但是排除 (排除的項目, 回呼函數) {
+    if (!(排除的項目 instanceof Bits)) {
+      throw new TypeError('排除的項目必須是Bits。')
+    }
 
-  /**
-   * 所有元素的加總。
-   * @return {number} 所有元素的加總。
-   * @example
-   * let v = new Vector([1, 2, 3])
-   * console.log(v.sum()) // 6
-   */
-  sum () {
-    return this.reduce((acc, curr) => acc + curr, 0)
+    for (let i = 0; i < this.length; i++) {
+      if (排除的項目.取得狀態(i)) {
+        continue
+      }
+      回呼函數(this[i], i)
+    }
+    return this
   }
 }
 
