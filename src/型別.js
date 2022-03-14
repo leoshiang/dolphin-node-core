@@ -1,4 +1,4 @@
-/** @module Type **/
+/** @module 型別 **/
 
 const 型別常數 = {
   Array: 'Array',
@@ -35,6 +35,11 @@ const 不是正規表示式 = (obj) => 取得型別(obj) !== 型別常數.RegExp
 const 不是字串 = (obj) => 取得型別(obj) !== 型別常數.String
 const 型別相同 = (obj, other) => 取得型別(obj) === 取得型別(other)
 
+const 極小值 = 1.0E-150
+const 容許值 = 1.0E-8
+
+const 數值相等 = (a, b) => Math.abs(a - b) <= 容許值
+
 module.exports = {
   型別常數,
   取得型別,
@@ -58,4 +63,5 @@ module.exports = {
   不是正規表示式,
   不是字串,
   型別相同,
+  數值相等,
 }

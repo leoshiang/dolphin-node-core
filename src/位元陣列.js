@@ -228,4 +228,4 @@ class 位元陣列 {
   }
 }
 
-module.exports = 位元陣列
+module.exports = { 位元陣列 }
