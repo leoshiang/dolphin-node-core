@@ -1,6 +1,6 @@
 {
   "name": "dolphin-node-core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "./index.js",
   "description": "JavaScript 型別判斷、向量、矩陣、動態矩陣、位元陣列...",
   "author": "Leo Shiang <leoshiang@gmail.com>",
@@ -8,8 +8,7 @@
   "license": "MIT",
   "scripts": {
     "test": "jest",
-    "build": "webpack",
-    "docs": "jsdoc --configure .jsdoc.json --verbose"
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -23,8 +22,7 @@
     "jest": "^27.5.1"
   },
   "dependencies": {
-    "clean-jsdoc-theme": "^3.3.3",
-    "excel4node": "^1.2.1",
+    "excel4node": "^1.7.2",
     "mock-fs": "^5.1.2",
     "random-access-file": "^2.2.0",
     "webpack": "^5.69.1",

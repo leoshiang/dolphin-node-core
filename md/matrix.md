@@ -1,38 +1,38 @@
-# Matrix
+# 矩陣
 
-Matrix 是一個二維矩陣，其索引從0開始。Matrix 具備陣列的特性，因此可以用陣列的方式去存取，例如：
+矩陣 是一個二維矩陣，其索引從0開始。矩陣 具備陣列的特性，因此可以用陣列的方式去存取，例如：
 
 ```javascript
-let m = new Matrix(3,3)
+let m = new 矩陣(3,3)
 m[2][2] = 1
 ```
 
 ## 建立矩陣
 
-使用 `new Matrix()`可以建立一個矩陣，你可以傳入陣列的維度與預設值：
+使用 `new 矩陣()`可以建立一個矩陣，你可以傳入陣列的維度與預設值：
 
 ```javascript
-const { Matrix } = require('node-dophin')
-const m1 = new Matrix()         // 空矩陣
+const { 矩陣 } = require('dolphin-code-core')
+const m1 = new 矩陣()         // 空矩陣
 console.log('m1\r\n', m1)
 
-const m2 = new Matrix(4, 3)     // 4x3 矩陣(4 rows, 3 columns)
+const m2 = new 矩陣(4, 3)     // 4x3 數值矩陣(4 rows, 3 columns)
 console.log(m2)
 
-const m3 = new Matrix(3, 3, 1)  // 3x3 矩陣，用預設值 1 填滿
+const m3 = new 矩陣(3, 3, 1)  // 3x3 數值矩陣，用預設值 1 填滿
 console.log(m3)
 
-const m4 = new Matrix([1,2,3],  // | 1 2 3 |
-                      [4,5,6],  // | 4 5 6 |
-                      [7,8,9])  // | 7 8 9 |
+const m4 = new 矩陣([1,2,3],  // | 1 2 3 |
+                   [4,5,6],  // | 4 5 6 |
+                   [7,8,9])  // | 7 8 9 |
 console.log(m4)
 ```
 
 如果傳入的陣列維度不一樣，會自動調整大小為最大的陣列維度，例如：
 
 ```javascript
-const { Matrix } = require('node-dophin')
-const m = new Matrix([1, 2],    // | 1 2 0 |
+const { 矩陣 } = require('dolphin-code-core')
+const m = new 矩陣([1, 2],    // | 1 2 0 |
                      [3, 4, 5], // | 3 4 5 |
                      [6])       // | 6 0 0 |
 ```
@@ -40,16 +40,16 @@ const m = new Matrix([1, 2],    // | 1 2 0 |
 矩陣可以置入任何型態的資料：
 
 ```javascript
-const { Matrix } = require('node-dophin')
-const m = new Matrix(['a', 1, new Date()],
+const { 矩陣 } = require('dolphin-code-core')
+const m = new 矩陣(['a', 1, new Date()],
                      [(x)=>{console.log(x)}, 4, 'c'])
 ```
 
-若要建立單位矩陣（identity matrix），可以使用 identity()：
+若要建立單位矩陣（identity 矩陣），可以使用 identity()：
 
 ```javascript
-const { Matrix } = require('node-dophin')
-const m = new Matrix(3, 3)
+const { 矩陣 } = require('dolphin-code-core')
+const m = new 矩陣(3, 3)
 m.identity()  // | 1 0 0 |
               // | 0 1 0 |
               // | 0 0 1 |
@@ -60,8 +60,8 @@ m.identity()  // | 1 0 0 |
 clone() 可以複製一個矩陣，新矩陣的維度與所有元素均與原本的矩陣相同。
 
 ```javascript
-const { Matrix } = require('node-dophin')
-const m1 = new Matrix([1,2,3],  // | 1 2 3 | 
+const { 矩陣 } = require('dolphin-code-core')
+const m1 = new 矩陣([1,2,3],  // | 1 2 3 | 
                       [4,5,6],  // | 4 5 6 |
                       [7,8,9])  // | 7 8 9 |
 const m2 = m1.clone() // | 1 2 3 | 
@@ -74,14 +74,14 @@ const m2 = m1.clone() // | 1 2 3 |
 呼叫 resize 可以改變維度，如果新的維度較大，新的元素會以預設值 0 填入：
 
 ```javascript
-const { Matrix } = require('node-dophin')
-const m1 = new Matrix([1,2,3],  // | 1 2 3 | 
+const { 矩陣 } = require('dolphin-code-core')
+const m1 = new 矩陣([1,2,3],  // | 1 2 3 | 
                       [4,5,6],  // | 4 5 6 |
                       [7,8,9])  // | 7 8 9 |
 m1.resize(3, 1) // | 1 |
                 // | 4 |
                 // | 7 |
-const m2 = new Matrix([1, 2, 3])
+const m2 = new 矩陣([1, 2, 3])
 m2.resize(3, 3) // | 1 2 3 |
                 // | 0 0 0 |
                 // | 0 0 0 |
@@ -94,8 +94,8 @@ m2.resize(3, 3) // | 1 2 3 |
 用 column() 可以取得某個 column 所有的值，結果是以陣列方式回傳：
 
 ```javascript
-const { Matrix } = require('node-dophin')
-let m = new Matrix([1, 2, 3],
+const { 矩陣 } = require('dolphin-code-core')
+let m = new 矩陣([1, 2, 3],
                    [4, 5, 6],
                    [7, 8, 9])
 let c = m.column(0) // [1, 4, 4]
@@ -106,8 +106,8 @@ let c = m.column(0) // [1, 4, 4]
 用 row() 可以取得某個 row 所有的值，結果是以陣列方式回傳：
 
 ```javascript
-const { Matrix } = require('node-dophin')
-let m = new Matrix([1, 2, 3],
+const { 矩陣 } = require('dolphin-code-core')
+let m = new 矩陣([1, 2, 3],
                    [4, 5, 6],
                    [7, 8, 9])
 let c = m[2]  // [7, 8, 9]
@@ -116,8 +116,8 @@ let c = m[2]  // [7, 8, 9]
 ### 取得行（column）的數量
 
 ```javascript
-const { Matrix } = require('node-dophin')
-let m = new Matrix([1, 2, 3],
+const { 矩陣 } = require('dolphin-code-core')
+let m = new 矩陣([1, 2, 3],
                    [4, 5, 6],
                    [7, 8, 9])
 console.log(m.columns) // 3
@@ -126,8 +126,8 @@ console.log(m.columns) // 3
 ### 取得列（row）的數量
 
 ```javascript
-const { Matrix } = require('node-dophin')
-let m = new Matrix([1, 2, 3],
+const { 矩陣 } = require('dolphin-code-core')
+let m = new 矩陣([1, 2, 3],
                    [4, 5, 6],
                    [7, 8, 9])
 console.log(m.rows) // 3
@@ -138,11 +138,11 @@ console.log(m.rows) // 3
 如果要讓整個陣列都是同一個值，可以用 fill()
 
 ```javascript
-const { Matrix } = require('node-dophin')
-let m = new Matrix(3, 3).fill(1) // | 1 1 1 |
+const { 矩陣 } = require('dolphin-code-core')
+let m = new 矩陣(3, 3).fill(1) // | 1 1 1 |
                                  // | 1 1 1 |
                                  // | 1 1 1 |
-let n = new Matrix(3, 3).fill('a') // | a a a |
+let n = new 矩陣(3, 3).fill('a') // | a a a |
                                    // | a a a |
                                    // | a a a |
 ```
@@ -154,8 +154,8 @@ let n = new Matrix(3, 3).fill('a') // | a a a |
 > row 與 column 編號是從 0 開始。
 
 ```javascript
-const { Matrix } = require('node-dophin')
-const m = new Matrix([1,2,3],  // | 1 2 3 | 
+const { 矩陣 } = require('dolphin-code-core')
+const m = new 矩陣([1,2,3],  // | 1 2 3 | 
                      [4,5,6],  // | 4 5 6 |
                      [7,8,9])  // | 7 8 9 |
 console.log(m[1,1]) // 5
@@ -168,8 +168,8 @@ console.log(m[1,1]) // 5
 > row 與 column 編號是從 0 開始。
 
 ```javascript
-const { Matrix } = require('node-dophin')
-const m = new Matrix([1,2,3],  // | 1 2 3 | 
+const { 矩陣 } = require('dolphin-code-core')
+const m = new 矩陣([1,2,3],  // | 1 2 3 | 
                      [4,5,6],  // | 4 5 6 |
                      [7,8,9])  // | 7 8 9 |
 m[1][1] = 9 // | 1 2 3 | 
@@ -184,8 +184,8 @@ m[1][1] = 9 // | 1 2 3 |
 用 forEach 可以遍歷每一個元素：
 
 ```javascript
-const { Matrix } = require('node-dophin')
-new Matrix(2, 2).fill(1).forEach((x, row, column) => {
+const { 矩陣 } = require('dolphin-code-core')
+new 矩陣(2, 2).fill(1).forEach((x, row, column) => {
       console.log(`(${row},${column})=${x}`)
     })
 // (0,0)=1
@@ -199,8 +199,8 @@ new Matrix(2, 2).fill(1).forEach((x, row, column) => {
 用 forEachColumn 可以遍歷每一行：
 
 ```javascript
-const { Matrix } = require('node-dophin')
-let m = new Matrix([1, 2],
+const { 矩陣 } = require('dolphin-code-core')
+let m = new 矩陣([1, 2],
                    [3, 4],
                    [5, 6])
 m.forEachColumn((values, column)=> {
@@ -215,8 +215,8 @@ m.forEachColumn((values, column)=> {
 用 forEachRow 可以遍歷每一行：
 
 ```javascript
-const { Matrix } = require('node-dophin')
-let m = new Matrix([1, 2],
+const { 矩陣 } = require('dolphin-code-core')
+let m = new 矩陣([1, 2],
                    [3, 4],
                    [5, 6])
 m.forEachRow((values, row)=> {
@@ -234,8 +234,8 @@ m.forEachRow((values, row)=> {
 columnSum() 可以計算某個行的總和：
 
 ```javascript
-const { Matrix } = require('node-dophin')
-let m = new Matrix(3, 3, 1)
+const { 矩陣 } = require('dolphin-code-core')
+let m = new 矩陣(3, 3, 1)
 console.log(m.columnSum(0)) // 3
 ```
 
@@ -244,8 +244,8 @@ console.log(m.columnSum(0)) // 3
 rowSum() 可以計算某個列的總和，結果是以陣列方式回傳：
 
 ```javascript
-const { Matrix } = require('node-dophin')
-let m = new Matrix([1, 2, 3])
+const { 矩陣 } = require('dolphin-code-core')
+let m = new 矩陣([1, 2, 3])
 console.log(m.rowSum(0)) // 6
 ```
 
@@ -254,11 +254,11 @@ console.log(m.rowSum(0)) // 6
 矩陣相乘的結果透過新的陣列回傳：
 
 ```javascript
-const { Matrix } = require('node-dophin')
-let m = new Matrix([1, 2],
+const { 矩陣 } = require('dolphin-code-core')
+let m = new 矩陣([1, 2],
                    [3, 4],
                    [5, 6])
-let n = new Matrix([1, 2, 3, 4],
+let n = new 矩陣([1, 2, 3, 4],
                    [5, 6, 7, 8])
 let result = m.multiply(n) // | 11 14 17 20 |
                            // | 23 30 37 44 |
@@ -268,8 +268,8 @@ let result = m.multiply(n) // | 11 14 17 20 |
 也可以將陣列每一個元素乘上一個值：
 
 ```javascript
-const { Matrix } = require('node-dophin')
-let m = new Matrix([1, 2, 3],
+const { 矩陣 } = require('dolphin-code-core')
+let m = new 矩陣([1, 2, 3],
                    [2, 3, 4],
                    [3, 4, 5])
 m.multiply(3) // | 3  6  9 |
@@ -282,11 +282,11 @@ m.multiply(3) // | 3  6  9 |
 兩個矩陣相加會將結果透過新的陣列回傳：
 
 ```javascript
-const { Matrix } = require('node-dophin')
-let m = new Matrix([1, 2, 3],
+const { 矩陣 } = require('dolphin-code-core')
+let m = new 矩陣([1, 2, 3],
                    [2, 3, 4],
                    [3, 4, 5])
-let n = new Matrix(3, 3, 1)
+let n = new 矩陣(3, 3, 1)
 let result = n.add(m) // |  0 -1 -2 |
                       //  | -1 -2 -3 |
                       // | -2 -3 -4 |
@@ -295,8 +295,8 @@ let result = n.add(m) // |  0 -1 -2 |
 也可以將陣列每一個元素加上一個值：
 
 ```javascript
-const { Matrix } = require('node-dophin')
-let m = new Matrix([1, 2, 3],
+const { 矩陣 } = require('dolphin-code-core')
+let m = new 矩陣([1, 2, 3],
                    [2, 3, 4],
                    [3, 4, 5])
 m.add(1) // | 0 1 2 |
@@ -309,11 +309,11 @@ m.add(1) // | 0 1 2 |
 兩個矩陣相減會將結果透過新的陣列回傳：
 
 ```javascript
-const { Matrix } = require('node-dophin')
-let m = new Matrix([1, 2, 3],
+const { 矩陣 } = require('dolphin-code-core')
+let m = new 矩陣([1, 2, 3],
                    [2, 3, 4],
                    [3, 4, 5])
-let n = new Matrix(3, 3, 1)
+let n = new 矩陣(3, 3, 1)
 let result = n.subtract(m) // |  0 -1 -2 |
                            // | -1 -2 -3 |
                            // | -2 -3 -4 |
@@ -322,8 +322,8 @@ let result = n.subtract(m) // |  0 -1 -2 |
 也可以將陣列每一個元素減去一個值：
 
 ```javascript
-const { Matrix } = require('node-dophin')
-let m = new Matrix([1, 2, 3],
+const { 矩陣 } = require('dolphin-code-core')
+let m = new 矩陣([1, 2, 3],
                    [2, 3, 4],
                    [3, 4, 5])
 m.subtract(1) // | 0 1 2 |

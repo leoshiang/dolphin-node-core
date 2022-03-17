@@ -191,28 +191,6 @@ class 矩陣 extends Array {
     }
 
     /**
-     * 所有元素的加總。
-     * @return {number}
-     * @example
-     * let m1 = new 矩陣(2, 2)
-     * m1[0][0] = 1
-     * m1[0][1] = 2
-     * m1[1][0] = 3
-     * m1[1][1] = 4
-     * console.log(m1.加總())
-     */
-    加總() {
-        let 結果 = 0
-        for (let 橫列 = 0; 橫列 < this.#橫列數; 橫列++) {
-            let 列資料 = this[橫列]
-            for (let 直行 = 0; 直行 < this.#直行數; 直行++) {
-                結果 += 列資料[直行]
-            }
-        }
-        return 結果
-    }
-
-    /**
      * 填入數值。
      * @param {number} 數值 要填入的數值。
      * @return {矩陣} 矩陣本身。
@@ -313,6 +291,28 @@ class 矩陣 extends Array {
         let 新向量 = new 向量(this.#橫列數)
         this.forEach((橫列, 橫列編號) => 新向量[橫列編號] = 橫列[直行編號])
         return 新向量
+    }
+
+    /**
+     * 所有元素的加總。
+     * @return {number}
+     * @example
+     * let m1 = new 矩陣(2, 2)
+     * m1[0][0] = 1
+     * m1[0][1] = 2
+     * m1[1][0] = 3
+     * m1[1][1] = 4
+     * console.log(m1.總和())
+     */
+    總和() {
+        let 結果 = 0
+        for (let 橫列 = 0; 橫列 < this.#橫列數; 橫列++) {
+            let 列資料 = this[橫列]
+            for (let 直行 = 0; 直行 < this.#直行數; 直行++) {
+                結果 += 列資料[直行]
+            }
+        }
+        return 結果
     }
 
     /**
