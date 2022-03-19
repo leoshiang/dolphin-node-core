@@ -1,4 +1,4 @@
-const {位元陣列} = require('../src/位元陣列')
+const 位元陣列 = require('../src/位元陣列')
 const {
     型別錯誤,
     參數錯誤,

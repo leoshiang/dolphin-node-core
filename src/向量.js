@@ -3,7 +3,7 @@ const {
     型別錯誤,
     參數錯誤,
 } = require('./例外')
-const {位元陣列} = require('./位元陣列')
+const 位元陣列 = require('./位元陣列')
 
 /**
  * @class
@@ -108,10 +108,11 @@ class 向量 extends Array {
         if (型別.不是數值(數值)) {
             throw new 型別錯誤('傳入的參數應為數值。')
         }
+        let result = new 向量(this.length)
         for (let i = 0; i < this.length; i++) {
-            this[i] *= 數值
+            result[i] = this[i] * 數值
         }
-        return this
+        return result
     }
 
     /**
@@ -215,6 +216,14 @@ class 向量 extends Array {
      */
     最大值(排除的項目) {
         return this.#找符合條件的元素(排除的項目, (目前的元素, 結果) => 目前的元素 > 結果)
+    }
+
+    非零() {
+        for (let 編號 = 0; 編號 < this.length; 編號++)
+        {
+            if (this[編號] !== 0) return true
+        }
+        return false
     }
 
     /**
@@ -331,4 +340,4 @@ class 向量 extends Array {
     }
 }
 
-module.exports = {向量}
+module.exports = 向量

@@ -1,5 +1,5 @@
-const {向量} = require('./src/向量')
-const {矩陣} = require('./src/矩陣')
+const 向量 = require('./src/向量')
+const 矩陣 = require('./src/矩陣')
 const {文字檔案} = require('./src/文字檔案')
 const 型別 = require('./src/型別')
 const 字串工具 = require('./src/字串工具')
