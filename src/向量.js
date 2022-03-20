@@ -218,14 +218,6 @@ class 向量 extends Array {
         return this.#找符合條件的元素(排除的項目, (目前的元素, 結果) => 目前的元素 > 結果)
     }
 
-    非零() {
-        for (let 編號 = 0; 編號 < this.length; 編號++)
-        {
-            if (this[編號] !== 0) return true
-        }
-        return false
-    }
-
     /**
      * 尋找最小值。
      * @return {{Value: number, Index: number}}
@@ -337,6 +329,13 @@ class 向量 extends Array {
             回呼函數(this[i], i)
         }
         return this
+    }
+
+    非零() {
+        for (let 編號 = 0; 編號 < this.length; 編號++) {
+            if (this[編號] !== 0) return true
+        }
+        return false
     }
 }
 

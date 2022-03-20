@@ -1,8 +1,8 @@
 {
   "name": "dolphin-node-core",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "main": "./index.js",
-  "description": "JavaScript 型別判斷、向量、矩陣、動態矩陣、位元陣列...",
+  "description": "JavaScript 型別判斷、向量、矩陣、位元陣列...",
   "author": "Leo Shiang <leoshiang@gmail.com>",
   "homepage": "https://github.com/leoshiang/dolphin-node-core#readme",
   "license": "MIT",

@@ -61,6 +61,13 @@ describe('測試【乘】', () => {
         expect(result[1]).toEqual([23, 30, 37, 44])
         expect(result[2]).toEqual([35, 46, 57, 68])
     })
+
+    test('A(BC)=(AB)C', () => {
+        const a = new 矩陣([1, 2], [3, 4])
+        const b = new 矩陣([4, 5], [6, 7])
+        const c = new 矩陣([8, 3], [9, 0])
+        expect(a.乘(b.乘(c))).toEqual(a.乘(b).乘(c))
+    })
 })
 
 describe('測試【加】', () => {
@@ -378,5 +385,77 @@ describe('測試【列秩】', () => {
     test('[2,2,3,1][4,5,6,3][7,8,3,3][2,2,2,0]，列秩等於4', () => {
         const m = new 矩陣([2, 2, 3, 1], [4, 5, 6, 3], [7, 8, 3, 3], [2, 2, 2, 0])
         expect(m.列秩()).toBe(4)
+    })
+})
+
+describe('測試【相等】', () => {
+    test('[1,2][3,4]與[7,8,3,3][2,2,2,0]應不相等', () => {
+        const m1 = new 矩陣([1, 2], [3, 4])
+        const m2 = new 矩陣([7, 8, 3, 3], [2, 2, 2, 0])
+        expect(m1.相等(m2)).toBe(false)
+    })
+
+    test('[1,2][3,2]與[1,2][3,4]應不相等', () => {
+        const m1 = new 矩陣([1, 2], [3, 2])
+        const m2 = new 矩陣([1, 2], [3, 4])
+        expect(m1.相等(m2)).toBe(false)
+    })
+
+    test('[1.00000001,2][3,2]與[1,2][3,4]應不相等', () => {
+        const m1 = new 矩陣([1.00000001, 2], [3, 2])
+        const m2 = new 矩陣([1, 2], [3, 4])
+        expect(m1.相等(m2)).toBe(false)
+    })
+
+    test('[1.000000001,2][3,2]與[1,2][3,4]應相等', () => {
+        const m1 = new 矩陣([1.000000001, 2], [3, 2])
+        const m2 = new 矩陣([1, 2], [3, 2])
+        expect(m1.相等(m2)).toBe(true)
+    })
+
+    test('[1,2][3,4]與[1,2][3,4]應相等', () => {
+        const m1 = new 矩陣([1, 2], [3, 4])
+        const m2 = new 矩陣([1, 2], [3, 4])
+        expect(m1.相等(m2)).toBe(true)
+    })
+})
+
+describe('測試交換律', () => {
+    test('A+B=B+A', () => {
+        const a = new 矩陣([1, 2], [3, 4])
+        const b = new 矩陣([4, 5], [6, 7])
+        expect(a.加(b)).toEqual(b.加(a))
+    })
+
+    test('A-B <> B-A', () => {
+        const a = new 矩陣([1, 2], [3, 4])
+        const b = new 矩陣([4, 5], [6, 7])
+        expect(a.減(b)).not.toEqual(b.減(a))
+    })
+
+    test('(A+B)+C=A+(B+C(', () => {
+        const a = new 矩陣([1, 2], [3, 4])
+        const b = new 矩陣([4, 5], [6, 7])
+        const c = new 矩陣([8, 3], [9, 0])
+        expect(a.加(b).加(c)).toEqual(a.加(b.加(c)))
+    })
+})
+
+describe('是反對稱矩陣', () => {
+    test('At=-A', () => {
+        const m = new 矩陣([0, 2, -1], [-2, 0, -4], [1, 4, 0])
+        expect(m.是反對稱矩陣()).toBe(true)
+    })
+
+    test('At=-A', () => {
+        const m = new 矩陣([0, 1, -1], [-2, 0, -4], [1, 4, 0])
+        expect(m.是反對稱矩陣()).toBe(false)
+    })
+})
+
+describe('是對稱矩陣', () => {
+    test('At=A', () => {
+        const m = new 矩陣([1, 2, 3], [2, 4, -5], [3, -5, 6])
+        expect(m.是對稱矩陣()).toBe(true)
     })
 })
