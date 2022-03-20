@@ -35,10 +35,11 @@ const 不是正規表示式 = (obj) => 取得型別(obj) !== 型別常數.RegExp
 const 不是字串 = (obj) => 取得型別(obj) !== 型別常數.String
 const 型別相同 = (obj, other) => 取得型別(obj) === 取得型別(other)
 
-const 極小值 = 1.0E-150
-const 容許值 = 1.0E-8
+const 容許值 = 1.0E-8 // 1.0E-150
 
 const 數值相等 = (a, b) => Math.abs(a - b) <= 容許值
+const 極小值 = (x) => Math.abs(x) < 容許值
+const 去除小數部分連續的0 = (x) => parseFloat( x.toFixed(8).toString())
 
 module.exports = {
     型別常數,
@@ -64,4 +65,6 @@ module.exports = {
     不是字串,
     型別相同,
     數值相等,
+    極小值,
+    去除小數部分連續的0
 }

@@ -590,6 +590,17 @@ class 矩陣 extends Array {
         let 暫存矩陣 = this.擴展(矩陣.單位矩陣(this.橫列數))
         return this.#高斯約旦消去法計算反矩陣(暫存矩陣)
     }
+
+    文字表示() {
+        let 結果 = '[\r\n'
+        this.forEach((row) => {
+            結果 += '  [' +
+                row.reduce((acc, curr) => acc + ' ' + 型別.去除小數部分連續的0((型別.極小值(curr) ? 0 : curr)) + ' ', '')
+            結果 += ']\r\n'
+        })
+        結果 += ']\r\n'
+        return 結果
+    }
 }
 
 module.exports = 矩陣
