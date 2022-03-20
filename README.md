@@ -11,7 +11,7 @@
 
 ## 文件
 
-* [陣列](https://leoshiang.github.io/dolphin-node-core/docs/matrix.html)
+* [矩陣](https://leoshiang.github.io/dolphin-node-core/docs/matrix.html)
 
 ## 下載
 ```bash
